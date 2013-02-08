@@ -1,0 +1,8 @@
+source:
+    'C:/wamp/www/viseophone/src'
+
+destination:
+    'C:/wamp/www/viseophone/build/api'
+
+progressbar:
+    no

@@ -1,0 +1,130 @@
+{% extends 'ODVdmBundle::layout.html.twig' %}
+
+{% block body %}
+
+<div id="sds-login" class=" sds-login-tpl1" style="background-color: rgb(0, 0, 0);height: 1080px" >
+
+    <img id="sds-login-dialog-bg" class="sds-login-dialog-bg" src="{{ asset('bundles/odvdm/images/login_light.png') }}"
+         style="left: 500px; top: 100px;">
+
+    <div id="sds-login-dialog" style="left: 500px; top: 80px;">
+        <div id="sds-login-dialog-title">Viséo Desktop Manager</div>
+        <div id="sds-login-dialog-status-container">
+            <div id="sds-login-dialog-status">
+                {% if error %}
+                    {{ error.message|trans }}
+                {% endif %}
+                </div>
+            </div>
+            <div id="sds-login-dialog-form" class=" x-plain x-form-label-left">
+                <div class="x-plain-bwrap" id="ext-gen12">
+                    <form id="login-form" class="x-plain-body x-plain-body-noheader x-form" method="POST" action="{{ path("_security_check") }}">
+                        <div id="ext-comp-1003" class=" x-panel sds-login-dialog-form-table" style="width: 380px;">
+                            <div class="x-panel-bwrap" id="ext-gen14">
+                                <div class="x-panel-body x-panel-body-noheader x-table-layout-ct" id="ext-gen15" style="width: 380px;">
+                                    <table class="x-table-layout" cellspacing="0" id="ext-gen47">
+                                        <tbody>
+                                            <tr>
+                                                <td class="x-table-layout-cell left" id="ext-gen22">
+                                                    <div id="ext-comp-1004" class=" x-panel x-hide-display">
+                                                        <div class="x-panel-bwrap" id="ext-gen23">
+                                                            <div class="x-panel-body x-panel-body-noheader" id="ext-gen24">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="x-table-layout-cell left-username" id="ext-gen26">
+                                                    <img src="{{ asset('bundles/odvdm/images/user.png') }}" id="ext-comp-1005">
+                                                </td>
+                                                <td class="x-table-layout-cell center" id="ext-gen27">
+                                                    <input type="text" id="username" name="_username" maxlength="256" class="x-form-text x-form-field" tabindex="1" value="{{ last_username }}">
+                                                </td>
+                                                <td class="x-table-layout-cell right" id="ext-gen28">
+                                                    <div id="ext-comp-1007" class=" x-panel x-hide-display">
+                                                        <div class="x-panel-bwrap" id="ext-gen29">
+                                                            <div class="x-panel-body x-panel-body-noheader" id="ext-gen30"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="x-table-layout-cell left" id="ext-gen32">
+                                                    <div id="ext-comp-1008" class=" x-panel x-hide-display">
+                                                        <div class="x-panel-bwrap" id="ext-gen33">
+                                                            <div class="x-panel-body x-panel-body-noheader" id="ext-gen34"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="x-table-layout-cell left-passwd" id="ext-gen36">
+                                                    <img src="{{ asset('bundles/odvdm/images/lock.png') }}" id="ext-comp-1009">
+                                                </td>
+                                                <td class="x-table-layout-cell center" id="ext-gen37">
+                                                    <input type="password" id="password" name="_password" maxlength="256" class="x-form-text x-form-field" tabindex="2" >
+                                                </td>
+                                                <td class="x-table-layout-cell right" id="ext-gen38">
+                                                    <div id="ext-comp-1011" class=" x-panel x-hide-display">
+                                                        <div class="x-panel-bwrap" id="ext-gen39">
+                                                            <div class="x-panel-body x-panel-body-noheader" id="ext-gen40"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x-form-item  x-hide-label" tabindex="-1" id="ext-gen17">
+                            <label for="login_rememberme" style="width:100px;" class="x-form-item-label" id="ext-gen18"></label>
+                            <div class="x-form-element" id="x-form-el-login_rememberme" style="padding-left: 10px">
+                                <div class="x-form-check-wrap" id="ext-gen19" style="width: 250px;">
+                                    <input type="checkbox" id="login_rememberme" name="rememberme" class=" x-form-checkbox x-form-field">
+                                    <label for="login_rememberme" class="x-form-cb-label" id="ext-gen20">Se souvenir de moi</label>
+                                </div>
+                            </div>
+                            <div class="x-form-clear-left"></div>
+                        </div>
+                        <table id="login-btn" cellspacing="0" class="x-btn x-btn-noicon">
+                            <tbody class="x-btn-small x-btn-icon-small-left">
+                                <tr>
+                                    <td class="x-btn-tl">
+                                        <i>&nbsp;</i>
+                                    </td>
+                                    <td class="x-btn-tc">
+
+                                    </td>
+                                    <td class="x-btn-tr">
+                                        <i>&nbsp;</i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="x-btn-ml">
+                                        <i>&nbsp;</i>
+                                    </td>
+                                    <td class="x-btn-mc">
+                                        <em class="">
+                                            <button type="button" id="login_submit_arrow" style="" class=" x-btn-text" tabindex="3">&nbsp;</button>
+                                        </em>
+                                    </td>
+                                    <td class="x-btn-mr">
+                                        <i>&nbsp;</i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="x-btn-bl">
+                                        <i>&nbsp;</i>
+                                    </td>
+                                    <td class="x-btn-bc"></td>
+                                    <td class="x-btn-br">
+                                        <i>&nbsp;</i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <input type="submit" id="login_submit" style="position: absolute; top: -10000px; left: -10000px;" tabindex="-1">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body%}
