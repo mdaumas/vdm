@@ -1,0 +1,23 @@
+parameters:
+    active_directory_user_provider.class: OD\ADBundle\Security\User\adUserProvider
+    active_directory_authentication_provider.class: OD\ADBundle\Security\Authentication\AdAuthProvider
+    active_directory_service_adldap.class: OD\ADBundle\Service\AdLdapService
+
+services:
+    active.directory.user.provider:
+        class: "%active_directory_user_provider.class%"
+        arguments:
+            - "@service_container"
+            - "@active.directory.service.adldap"
+
+    active.directory.authentication.provider:
+        class: "%active_directory_authentication_provider.class%"
+        arguments:
+            - "@active.directory.user.provider"
+            - ""
+            - "@active.directory.service.adldap"
+
+    active.directory.service.adldap:
+        class: "%active_directory_service_adldap.class%"
+        arguments:
+            - "@service_container"

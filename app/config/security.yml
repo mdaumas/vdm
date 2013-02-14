@@ -5,6 +5,7 @@ jms_security_extra:
 security:
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
+        OD\ADBundle\Security\User\AdUser: plaintext
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -13,14 +14,16 @@ security:
     providers:
         chain_provider:
             chain:
-                providers: [in_memory, ldap]
+                providers: [in_memory, active_directory_provider]
+
         in_memory:
             memory:
                 users:
                     user:  { password: userpass, roles: [ 'ROLE_USER' ] }
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
-        ldap:
-            id: od_ldap.user_provider
+
+        active_directory_provider:
+            id: active.directory.user.provider
 
     firewalls:
         dev:
@@ -34,6 +37,9 @@ security:
         secured_area:
             pattern:    ^/
             form_login:
+                check_path: /login_check
+                login_path: /login
+            active_directory:
                 check_path: /login_check
                 login_path: /login
             logout:
