@@ -60,7 +60,7 @@ Access the `config.php` script from a browser:
 
 If you get any warnings or recommendations, fix them before moving on.
 
-3) Getting started with Symfony
+4) Getting started with Symfony
 -------------------------------
 
 This distribution is meant to be the starting point for your Symfony
@@ -159,10 +159,3 @@ Enjoy!
 [13]: http://jmsyst.com/bundles/JMSSecurityExtraBundle/master
 [14]: http://jmsyst.com/bundles/JMSDiExtraBundle/master
 [15]: http://symfony.com/doc/2.1/bundles/SensioGeneratorBundle/index.html
-
-4) Configuring VDM Viséo Desktop Manager
-----------------------------------------
-
-  * see app/config/parameters.yml for database and mail settings;
-
-  * see app/config/config.yml for LDAP settings;
