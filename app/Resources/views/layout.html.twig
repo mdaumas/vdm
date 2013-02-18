@@ -16,3 +16,29 @@ Statistiques téléphoniques Viséo
 {% endif %}
 <script type="text/javascript" src="{{ asset('bundles/odvdm/js/extjs/locale/ext-lang-fr.js') }}"></script>
 {% endblock head_javascripts %}
+
+{% block constants %}
+<script type="text/javascript">
+var BASE_SRC = "http://localhost/vdm/";
+var EXTJS_SRC = BASE_SRC + "web/bundles/odvdm/js/extjs/";
+
+{% if app.environment == 'dev' %}
+var VDM_SRC = BASE_SRC + "src/OD/VdmBundle/Resources/public/js/vdm";
+{% else %}
+var VDM_SRC = BASE_SRC + "web/bundles/odvdm/js/";    
+{% endif %}
+
+Ext.define("vdm.Constants",{
+    alternateClassName	: "Vdm.Constants" ,
+    singleton	: true,
+    
+    LOADER_PATHS : {
+        vdm : VDM_SRC,
+        Ext: VDM_SRC
+    },
+    
+    LOGOUT_URL : "{{ path('_logout') }}"
+});	
+</script>
+
+{% endblock constants %}

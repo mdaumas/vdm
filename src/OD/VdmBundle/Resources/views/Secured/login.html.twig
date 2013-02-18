@@ -12,7 +12,7 @@
     {{ parent() }}
     {% stylesheets
         'bundles/odvdm/css/app.css'
-        'bundles/odvdm/css/desktop.css'
+        'bundles/odvdm/css/login.css'
         filter='cssrewrite'
     %}
 <link rel="stylesheet" href="{{ asset_url }}" />
@@ -20,7 +20,7 @@
 {% endblock stylesheets %}
 
 {% block body %}
-<div id="sds-login" class=" sds-login-tpl1" style="background-color: rgb(0, 0, 0);height: 1080px" >
+<div id="sds-login" class=" sds-login-tpl1" style="background-color: #3D71B8;height: 1080px" >
 
     <img id="sds-login-dialog-bg" class="sds-login-dialog-bg" src="{{ asset('bundles/odvdm/images/login_light.png') }}"
          style="left: 500px; top: 100px;">

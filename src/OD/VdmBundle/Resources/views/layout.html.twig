@@ -1,21 +1,2 @@
 {% extends '::layout.html.twig' %}
 
-{#
-{% block stylesheets %}
-    {{ parent() }}
-    {% stylesheets
-        filter='cssrewrite'
-    %}
-<link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
-{% endblock stylesheets %}
-#}
-
-{% block javascripts %}
-    {{ parent() }}
-    {% javascripts
-        '@ODVdmBundle/Resources/public/js/vdm.js'
-    %}
-<script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endblock javascripts %}

@@ -1,359 +1,325 @@
-#sds-login-dialog {
-	position: relative;
-}
+/*!
+* Ext JS Library 4.0
+* Copyright(c) 2006-2011 Sencha Inc.
+* licensing@sencha.com
+* http://www.sencha.com/license
+*/
 
-#sds-login-dialog-title {
-	position: absolute;
-	font-weight: bold;
-}
+#poweredby {
+    position: absolute;
+    bottom: 40px;
+    right: 20px;
+    z-index: 15000;
 
-#sds-login-dialog-status-container {
-	position: absolute;
-	display: table;
+    /* IE 5-7 */
+    filter: alpha(opacity=70);
+    /* Netscape */
+    -moz-opacity: 0.7;
+    /* Safari 1.x */
+    -khtml-opacity: 0.7;
+    /* Good browsers */
+    opacity: 0.7;
 }
 
-#sds-login-dialog-status {
-	vertical-align: middle;
-	display: table-cell;
-	font-size: 11px;
+#poweredby div {
+    position: relative;
+    width: 150px;
+    height: 25px;
+    background-image: url(../images/powered-by-ext-js.png);
+    background-repeat: no-repeat;
 }
 
-#sds-login-dialog-bg {
-	position: absolute;
-	width: 345px;
-	height: 270px;
+/* The simple background image PNG does not work in IE6-8, but does in IE9 */
+.x-ie6 #poweredby div,
+.x-ie7 #poweredby div,
+.x-ie8 #poweredby div {
+    background-image: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/powered-by-ext-js.png', sizingMethod='scale');
 }
 
-#sds-login-dialog-form {
-	position: absolute;
+/*----------------------------------------------------
+    Start Button
+*/
+
+.ux-start-button-icon {
+    background-image: url(/vdm/web/bundles/odvdm/images/desktop/taskbar/sencha.gif) !important;
+    background-color: transparent;
 }
 
-#sds-login-dialog-form .x-form-text {
-	height: 20px;
-	font-size: 13px;
-	line-height: 20px;
-	border-width: 0px;
+.ux-start-button .x-btn-arrow {
+    background-image: none;
 }
 
-#sds-login-dialog-form div.x-panel-body {
-	background-color: transparent;
-	border-width: 0px;
+.ux-start-button .x-btn-arrow-right {
+    padding-left: 10px;
 }
 
-#sds-login-dialog-form input#login_username {
-	background-image: none;
-	background-color: transparent;
+.ux-taskbar {
+    padding-left: 4px !important;
 }
+
+/*
+    Start Button (Black)
+*/
 
-#sds-login-dialog-form input#login_passwd {
-	background-image: none;
-	background-color: transparent;
+.ux-desktop-black .ux-start-button {
+    height: 28px;
+    padding: 0px;
+    display: block;
 }
 
-#login-btn.x-btn-noicon .x-btn-small .x-btn-text {
-	width: 20px;
-	height: 20px;
+.ux-desktop-black .ux-start-button em {
+    margin-top: 5px;
 }
 
-#login-btn .x-btn-ml, #login-btn .x-btn-mr {
-	display: none;
+.ux-desktop-black .ux-start-button .x-btn-inner {
+    color: black;
+    font-size:11px;
+    font-weight: bold;
 }
 
-#login-btn .x-btn-mc {
-	background-image: url("/vdm/web/bundles/odvdm/images/arrow.png");
-	height: 20px;
+.ux-desktop-black .ux-start-button {
+    background-image: -moz-linear-gradient(center top , #E4F3FF, #D9EDFF 48%, #C2D8F2 52%, #C6DCF6);
+    border-radius: 8px 8px 8px 8px;
+    border-color: #81A4D0;
 }
 
-#login-btn .x-btn-mc {
-	background-position: 0 0 !important;
+/*----------------------------------------------------
+    Start Menu
+*/
+
+.ux-start-menu-toolbar .x-btn-inner {
+    text-align: left;
 }
 
-#login-btn.x-btn-focus .x-btn-mc,
-#login-btn.x-btn-over .x-btn-mc {
-	background-position: 0 -21px  !important;
+.ux-start-menu-toolbar {
+    padding: 4px !important;
 }
 
+/*----------------------------------------------------
+    TaskBar
+*/
 
-#login-btn.x-btn-click .x-btn-mc {
-	background-position: 0 -42px  !important;
+.ux-taskbar .x-toolbar {
+    background: transparent none;
+    border-color: transparent;
 }
 
-#sds-login-icon {
-	position: absolute;
-	z-index: 20001;
+.x-ie6 .ux-taskbar .x-toolbar {
+    border-color: #d3e1f1;
 }
 
-#sds-login-banner {
-	position: absolute;
-	width: 100%;
-	height: 187px;
+.ux-desktop-windowbar .x-btn-inner,
+.x-nbr .ux-desktop-windowbar .x-btn-icon-text-left button {
+    text-align: left !important;
 }
 
-/* to hide the default input:checkbox. if set display:none, the event won't work in IE */
-#sds-login-dialog-form #login_rememberme {
-	width: 10px;
+.ux-taskbar .x-toolbar {
+    height: 28px;
 }
 
-/* css hack for Firefox and Opera which does not allow width:0px for form element */
-.ext-gecko #sds-login-dialog-form #login_rememberme,
-.ext-opera #sds-login-dialog-form #login_rememberme,
-.ext-webkit #sds-login-dialog-form #login_rememberme {
-	display:none;
+.ux-taskbar {
+    height: 28px;
+    padding: 0;
 }
 
-#sds-login-dialog-form label {
-	padding-left: 10px;
-	padding-bottom: 2px;
-	background-repeat: no-repeat;
+.x-toolbar .x-toolbar {
+    padding: 0;
 }
 
-.ext-gecko #sds-login-dialog-form label {
-	padding-bottom: 1px;
-}
+/*
+    TaskBar (Black)
+*/
 
-#sds-login-dialog-form label.nocheck {
-	background-position: 0px 0px;
+.ux-desktop-black .ux-taskbar {
+    background: transparent url('/vdm/web/bundles/odvdm/images/desktop/taskbar/black/taskbar-start-panel-bg.gif') repeat-x left top;
+    border-color: transparent;
+    /*height: 30px;*/
 }
 
-#sds-login-dialog-form label.nocheckActive {
-	background-position: 0px -18px;
+.ux-desktop-black .ux-taskbar .x-splitter {
+    background: transparent url(/vdm/web/bundles/odvdm/images/desktop/taskbar/black/taskbar-split-h.gif) no-repeat scroll 0 -2px;
 }
 
-#sds-login-dialog-form label.check {
-	background-position: 0px -36px;
+.ux-desktop-black .ux-taskbar .x-toolbar-text {
+    color: white !important;
 }
 
-#sds-login-dialog-form label.checkActive {
-	background-position: 0px -54px;
+.ux-desktop-black .ux-taskbar .x-btn-default-toolbar-small-over {
+    background-color: yellow;
 }
 
-#sds-login-dialog-form .x-form-item {
-	margin-left: 8px;
+.ux-desktop-black .ux-taskbar .x-btn-inner {
+    color: white;
 }
 
-#login-btn {
-	position: absolute;
+.ux-desktop-black .ux-taskbar .x-btn-pressed .x-btn-inner, .ux-taskbar .x-btn-over .x-btn-inner {
+    color: black;
 }
 
+/*----------------------------------------------------
+    Tray Clock
+*/
 
-.sds-login-tpl1 #sds-login-dialog-form,
-.sds-login-tpl3 #sds-login-dialog-form {
-	width: 267px;
+.ux-desktop-trayclock {
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
-.sds-login-tpl2 #sds-login-dialog-form,
-.sds-login-tpl4 #sds-login-dialog-form {
-        width: 327px;
-}
+/*----------------------------------------------------
+    Desktop DataView
+*/
 
-.sds-login-tpl1 #sds-login-dialog-form table,
-.sds-login-tpl3 #sds-login-dialog-form table {
-	border-spacing: 0px 10px;
+.ux-wallpaper {
+    background-color: #3d71b8;
 }
 
-.sds-login-tpl2 #sds-login-dialog-form table,
-.sds-login-tpl4 #sds-login-dialog-form table {
-	border-spacing: 0px 8px;
+.ux-wallpaper-tiled {
+    background-repeat: repeat;
 }
 
-.sds-login-tpl1 .sds-login-dialog-form-table td,
-.sds-login-tpl3 .sds-login-dialog-form-table td {
-	height: 44px;
-	background-image: url("/vdm/web/bundles/odvdm/images/input_style1.png");
-	background-repeat: no-repeat;
+.ux-desktop-shortcut {
+    cursor: pointer;
+    text-align: center;
+    padding: 8px;
+    margin: 8px;
+    width: 64px;
 }
 
-.sds-login-tpl2 .sds-login-dialog-form-table td,
-.sds-login-tpl4 .sds-login-dialog-form-table td {
-	height: 39px;
-	background-image: url("/vdm/web/bundles/odvdm/images/input_style2.png");
-	background-repeat: no-repeat;
+.ux-desktop-shortcut-icon {
+    width: 48px;
+    height: 48px;
+    background-color: transparent;
+    background-repeat: no-repeat;
 }
 
-.sds-login-tpl1 .sds-login-dialog-form-table td.left,
-.sds-login-tpl3 .sds-login-dialog-form-table td.left {
-	width: 14px;
-	background-position: 0px 0px;
+.ux-desktop-shortcut-text {
+    font: normal 10px tahoma,arial,verdana,sans-serif;
+    text-decoration: none;
+    padding-top: 5px;
+    color: white;
 }
 
-.sds-login-tpl2 .sds-login-dialog-form-table td.left,
-.sds-login-tpl4 .sds-login-dialog-form-table td.left {
-	width: 12px;
-	background-position: 0px 0px;
+.x-view-over .ux-desktop-shortcut-text {
+    text-decoration: underline;
 }
 
-.sds-login-tpl1 .sds-login-dialog-form-table td.left-username,
-.sds-login-tpl1 .sds-login-dialog-form-table td.left-passwd,
-.sds-login-tpl3 .sds-login-dialog-form-table td.left-username,
-.sds-login-tpl3 .sds-login-dialog-form-table td.left-passwd {
-	width: 20px;
-	background-position: 0px -44px;
-	background-repeat: repeat-x;
-}
 
-.sds-login-tpl2 .sds-login-dialog-form-table td.left-username,
-.sds-login-tpl2 .sds-login-dialog-form-table td.left-passwd,
-.sds-login-tpl4 .sds-login-dialog-form-table td.left-username,
-.sds-login-tpl4 .sds-login-dialog-form-table td.left-passwd {
-	width: 20px;
-	background-position: 0px -39px;
-	background-repeat: repeat-x;
-}
+/*----------------------------------------------------
+    Various icon classes
+*/
 
-.sds-login-tpl1 .sds-login-dialog-form-table td.right,
-.sds-login-tpl3 .sds-login-dialog-form-table td.right {
-	width: 14px;
-	background-position: 0px -88px;
+.accordion-shortcut {
+    background-image: url(/vdm/web/bundles/odvdm/images/desktop/im48x48.png);
 }
 
-.sds-login-tpl2 .sds-login-dialog-form-table td.right,
-.sds-login-tpl4 .sds-login-dialog-form-table td.right {
-	width: 12px;
-	background-position: 0px -78px;
+.cpu-shortcut {
+    background-image: url(/vdm/web/bundles/odvdm/images/desktop/statusLarge.png);
 }
 
-.sds-login-tpl1 .sds-login-dialog-form-table td.center,
-.sds-login-tpl3 .sds-login-dialog-form-table td.center {
-	width: 255px;
-	background-repeat: repeat-x;
-	background-position: 0px -44px;
+.grid-shortcut {
+    background-image: url(/vdm/web/bundles/odvdm/images/desktop/grid48x48.png);
 }
 
-.sds-login-tpl2 .sds-login-dialog-form-table td.center,
-.sds-login-tpl4 .sds-login-dialog-form-table td.center {
-	width: 231px;
-	background-repeat: repeat-x;
-	background-position: 0px -39px;
+.notepad-shortcut {
+    background-image: url(/vdm/web/bundles/odvdm/images/desktop/notepadLarge.png);
+    width: 46px;
+    height: 46px;
 }
 
-.sds-login-tpl1 #sds-login-dialog-form input,
-.sds-login-tpl3 #sds-login-dialog-form input {
-	width: 200px;
+.x-ie6 .accordion-shortcut {
+    background-image: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/desktop/im48x48.png', sizingMethod='scale');
 }
 
-.sds-login-tpl2 #sds-login-dialog-form input,
-.sds-login-tpl4 #sds-login-dialog-form input {
-        width: 179px;
+.x-ie6 .cpu-shortcut {
+    background-image: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/desktop/statusLarge.png', sizingMethod='scale');
 }
 
-.sds-login-tpl2 #sds-login-banner {
-	background: url("/vdm/web/bundles/odvdm/images/content_light.png") repeat-x;
+.x-ie6 .grid-shortcut {
+    background-image: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/desktop/grid48x48.png', sizingMethod='scale');
 }
 
-.sds-login-tpl4 #sds-login-banner {
-        background: url("/vdm/web/bundles/odvdm/images/content_black.png") repeat-x;
+.x-ie6 .notepad-shortcut {
+    background-image: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/desktop/notepadLarge.png', sizingMethod='scale');
 }
 
-.sds-login-tpl1 #sds-login-dialog-form label {
-	color: #444444;
+.video {
+    background-image: url(/vdm/web/bundles/odvdm/images/desktop/gears.gif);
 }
 
-.sds-login-tpl2 #sds-login-dialog-form label,
-.sds-login-tpl4 #sds-login-dialog-form label,
-.sds-login-tpl3 #sds-login-dialog-form label {
-	color: #FFFFFF;
+.bogus {
+    background-image: url(/vdm/web/bundles/odvdm/images/desktop/bogus.png ) !important;
 }
 
-#sds-login-logo {
-	position: absolute;
+.notepad {
+    background-image: url(/vdm/web/bundles/odvdm/images/desktop/bogus.png ) !important;
 }
 
-.sds-login-tpl1 #sds-login-dialog,
-.sds-login-tpl3 #sds-login-dialog {
-	width: 345px;
-	height: 270px;
+.logout {
+    background-image: url(/vdm/web/bundles/odvdm/images/desktop/logout.gif ) !important;
 }
 
-.sds-login-tpl2 #sds-login-dialog,
-.sds-login-tpl4 #sds-login-dialog {
-	width: 270px;
-	height: 150px;
+.settings {
+    background-image: url(/vdm/web/bundles/odvdm/images/desktop/gears.gif ) !important;
 }
 
-.sds-login-tpl1 #sds-login-dialog-title,
-.sds-login-tpl3 #sds-login-dialog-title {
-	width: 250px;
-	left: 35px;
-	top: 40px;
-	font-size: 20px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	-o-text-overflow: ellipsis;
-}
 
-.sds-login-tpl2 #sds-login-dialog-title,
-.sds-login-tpl4 #sds-login-dialog-title {
-	left: 10px;
-	top: 2px;
-	font-size: 20px;
-	text-overflow: ellipsis;
-	-o-text-overflow: ellipsis;
+.icon-grid {
+    background-image:url(/vdm/web/bundles/odvdm/images/desktop/grid.png ) !important;
 }
-
-.sds-login-tpl1 #sds-login-dialog-title {
-	color: #555555;
+.add {
+    background-image:url(/vdm/web/bundles/odvdm/images/icons/fam/add.gif) !important;
 }
-
-.sds-login-tpl2 #sds-login-dialog-title,
-.sds-login-tpl3 #sds-login-dialog-title,
-.sds-login-tpl4 #sds-login-dialog-title {
-	color: #FFFFFF;
+.option {
+    background-image:url(/vdm/web/bundles/odvdm/images/icons/fam/plugin.gif) !important;
 }
-
-.ext-ie9 #sds-login-dialog-title {
-	filter: none;
+.remove {
+    background-image:url(/vdm/web/bundles/odvdm/images/icons/fam/delete.gif) !important;
 }
-
-.sds-login-tpl1 #sds-login-dialog-status-container,
-.sds-login-tpl3 #sds-login-dialog-status-container {
-	left: 35px;
-	top: 200px;
-	width: 260px;
+.save {
+    background-image:url(/vdm/web/bundles/odvdm/images/icons/save.gif) !important;
 }
-
-.sds-login-tpl2 #sds-login-dialog-status-container,
-.sds-login-tpl4 #sds-login-dialog-status-container {
-	left: 273px;
-	top: 81px;
-	width: 260px;
-	height: 40px;
+.accordion {
+    background-image:url(/vdm/web/bundles/odvdm/images/desktop/accordian.gif) !important;
 }
+.tabs {
+    background-image:url(/vdm/web/bundles/odvdm/images/desktop/tabs.gif) !important;
+}
+
+/*----------------------------------------------------
+    IM window icons
+*/
 
-.sds-login-tpl1 #sds-login-dialog-status {
-	color: #444444;
+.user {
+    background-image:url(/vdm/web/bundles/odvdm/images/icons/fam/user.gif ) !important;
 }
 
-.sds-login-tpl2 #sds-login-dialog-status,
-.sds-login-tpl3 #sds-login-dialog-status,
-.sds-login-tpl4 #sds-login-dialog-status {
-	color: #FFFFFF;
+.user-add {
+    background-image:url(/vdm/web/bundles/odvdm/images/icons/fam/user_add.gif) !important;
 }
 
-.sds-login-tpl1 #sds-login-dialog-form,
-.sds-login-tpl3 #sds-login-dialog-form {
-	left: 21px;
-	top: 78px;
-	width: 327px;
+.user-delete {
+    background-image:url(/vdm/web/bundles/odvdm/images/icons/fam/user_delete.gif) !important;
 }
 
-.sds-login-tpl2 #sds-login-dialog-form,
-.sds-login-tpl4 #sds-login-dialog-form {
-	top: 29px;
-	width: 267px;
+.connect {
+    background-image:url(/vdm/web/bundles/odvdm/images/icons/fam/connect.gif) !important;
 }
 
-.sds-login-tpl1 #login-btn,
-.sds-login-tpl3 #login-btn {
-	left: 268px;
-	top: 30px;
+.user-girl {
+    background-image:url(/vdm/web/bundles/odvdm/images/icons/fam/user_female.gif) !important;
 }
 
-.sds-login-tpl2 #login-btn,
-.sds-login-tpl4 #login-btn {
-	left: 235px;
-	top: 48px;
+.user-kid {
+    background-image:url(/vdm/web/bundles/odvdm/images/icons/fam/user_green.gif) !important;
 }
 
-.x-form-text, textarea.x-form-field {
-    background: none;
+.user-suit {
+    background-image:url(/vdm/web/bundles/odvdm/images/icons/fam/user_suit.gif) !important;
 }
