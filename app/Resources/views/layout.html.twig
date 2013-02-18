@@ -9,5 +9,10 @@ Statistiques téléphoniques Viséo
 {% endblock stylesheets %}
 
 {% block head_javascripts %}
-<script type="text/javascript" src="{{ asset('bundles/odvdm/js/jquery/jquery-1.9.0.min.js') }}"></script>
+{% if app.environment == 'dev' %}
+<script type="text/javascript" src="{{ asset('bundles/odvdm/js/extjs/ext-all-dev.js') }}"></script>
+{% else %}
+<script type="text/javascript" src="{{ asset('bundles/odvdm/js/extjs/ext-all.js') }}"></script>
+{% endif %}
+<script type="text/javascript" src="{{ asset('bundles/odvdm/js/extjs/locale/ext-lang-fr.js') }}"></script>
 {% endblock head_javascripts %}
