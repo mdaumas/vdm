@@ -1,15 +1,31 @@
 Ext.define('vdm.view.Application', {
     extend: 'Ext.ux.desktop.Application',
 
-    requires: [
-        'vdm.store.LoggedUser'
-    ],
+    requires: [],
     
     loggedUser: null,
-
-    init: function() {
+    
+    launch: function(){
         var me = this;
-        me.loggedUser =  new vdm.store.LoggedUser().sync();
+		
+        me.addEvents({
+            "ready"	: true
+        });
+
+        me.callParent(arguments);
+		
+        Ext.Ajax.request({
+            url		: vdm.Constants.LOGGED_USER_URL,
+            scope	: this,
+            success	: this.buildApplication,
+            failure	: this.onError
+        });        
+    },
+
+    buildApplication: function(response) {
+        var me = this;
+        var data =  Ext.decode(response.responseText);
+        me.loggedUser = data.users;
         this.callParent();
     },
 
@@ -17,7 +33,7 @@ Ext.define('vdm.view.Application', {
         var me = this, ret = me.callParent();
 
         return Ext.apply(ret, {
-            title: me.loggedUser.username,
+            title: me.loggedUser.displayName,
             iconCls: 'user',
             height: 300,
             toolConfig: {

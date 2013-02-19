@@ -5,6 +5,7 @@
  *
  **/
 Ext.define('Ext.ux.desktop.Application', {
+    extend : "Ext.app.Application",
     mixins: {
         observable: 'Ext.util.Observable'
     },
@@ -18,6 +19,7 @@ Ext.define('Ext.ux.desktop.Application', {
     modules: null,
     useQuickTips: true,
 
+/*
     constructor: function (config) {
         var me = this;
         me.addEvents(
@@ -33,8 +35,9 @@ Ext.define('Ext.ux.desktop.Application', {
             Ext.onReady(me.init, me);
         }
     },
+*/
 
-    init: function() {
+    buildApplication: function() {
         var me = this, desktopCfg;
 
         if (me.useQuickTips) {
