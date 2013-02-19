@@ -1,19 +1,17 @@
-/*!
- * Ext JS Library 4.0
- * Copyright(c) 2006-2011 Sencha Inc.
- * licensing@sencha.com
- * http://www.sencha.com/license
- */
-
-Ext.define('Ext.ux.desktop.App', {
+/**
+ *
+ * The application class
+ *
+ *
+ **/
+Ext.define('Ext.ux.desktop.Application', {
     mixins: {
         observable: 'Ext.util.Observable'
     },
 
     requires: [
-        'Ext.container.Viewport',
-
-        'Ext.ux.desktop.Desktop'
+    'Ext.container.Viewport',
+    'Ext.ux.desktop.Desktop'
     ],
 
     isReady: false,
@@ -25,7 +23,7 @@ Ext.define('Ext.ux.desktop.App', {
         me.addEvents(
             'ready',
             'beforeunload'
-        );
+            );
 
         me.mixins.observable.constructor.call(this, config);
 
@@ -86,11 +84,11 @@ Ext.define('Ext.ux.desktop.App', {
      */
     getStartConfig: function () {
         var me = this,
-            cfg = {
-                app: me,
-                menu: []
-            },
-            launcher;
+        cfg = {
+            app: me,
+            menu: []
+        },
+        launcher;
 
         Ext.apply(cfg, me.startConfig);
 
@@ -133,7 +131,7 @@ Ext.define('Ext.ux.desktop.App', {
     },
 
     getModule : function(name) {
-    	var ms = this.modules;
+        var ms = this.modules;
         for (var i = 0, len = ms.length; i < len; i++) {
             var m = ms[i];
             if (m.id == name || m.appType == name) {

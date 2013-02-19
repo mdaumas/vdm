@@ -1,20 +1,23 @@
-Ext.define('vdm.view.App', {
-    extend: 'Ext.ux.desktop.App',
+Ext.define('vdm.view.Application', {
+    extend: 'Ext.ux.desktop.Application',
 
     requires: [
+        'vdm.store.LoggedUser'
     ],
+    
+    loggedUser: null,
 
     init: function() {
-        // custom logic before getXYZ methods get called...
+        var me = this;
+        me.loggedUser =  new vdm.store.LoggedUser().sync();
         this.callParent();
-    // now ready...
     },
 
-    // config for the start menu
     getStartConfig : function() {
         var me = this, ret = me.callParent();
 
         return Ext.apply(ret, {
+            title: me.loggedUser.username,
             iconCls: 'user',
             height: 300,
             toolConfig: {
@@ -35,8 +38,8 @@ Ext.define('vdm.view.App', {
         Ext.Msg.confirm(
             'Deconnexion', 
             'Voulez-vous vraiment vous deconnecter?', 
-            function(b){
-                if(b == "yes"){
+            function(button){
+                if(button == "yes"){
                     document.location = vdm.Constants.LOGOUT_URL;
                 }
             });

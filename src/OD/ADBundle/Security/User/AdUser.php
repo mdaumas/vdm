@@ -7,8 +7,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * UserInterface Implementation
  */
-class AdUser implements UserInterface
-{
+class AdUser implements UserInterface {
 
     /**
      * The username
@@ -39,14 +38,34 @@ class AdUser implements UserInterface
     private $roles;
 
     /**
+     * The user mail adress
+     * 
+     * @var string 
+     */
+    private $mail;
+
+    /**
+     * The user dn
+     * 
+     * @var string 
+     */
+    private $dn;
+
+    /**
+     * The user display name
+     * 
+     * @var string 
+     */
+    private $displayName;
+
+    /**
      * Constructor
      *
      * @param type  $username The username
      * @param type  $password The password
      * @param array $roles    The roles
      */
-    public function __construct($username, $password, array $roles)
-    {
+    public function __construct($username, $password, array $roles) {
         $this->username = $username;
         $this->password = $password;
         $this->salt = '';
@@ -61,8 +80,7 @@ class AdUser implements UserInterface
      *
      * @return string The password
      */
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
 
@@ -71,8 +89,7 @@ class AdUser implements UserInterface
      *
      * @param string $password
      */
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->password = $password;
     }
 
@@ -83,8 +100,7 @@ class AdUser implements UserInterface
      *
      * @return string The salt
      */
-    public function getSalt()
-    {
+    public function getSalt() {
         return null;
     }
 
@@ -93,8 +109,7 @@ class AdUser implements UserInterface
      *
      * @return string The username
      */
-    public function getUsername()
-    {
+    public function getUsername() {
         return $this->username;
     }
 
@@ -106,8 +121,7 @@ class AdUser implements UserInterface
      *
      * @return void
      */
-    public function eraseCredentials()
-    {
+    public function eraseCredentials() {
         //return void ;
     }
 
@@ -127,8 +141,7 @@ class AdUser implements UserInterface
      *
      * @return array Role[] The user roles
      */
-    public function getRoles()
-    {
+    public function getRoles() {
         return $this->roles;
     }
 
@@ -137,9 +150,35 @@ class AdUser implements UserInterface
      *
      * @param array $roles
      */
-    public function setRoles(array $roles)
-    {
+    public function setRoles(array $roles) {
         $this->roles = $roles;
+    }
+
+    public function setDisplayName($displayName) {
+        $this->displayName = $displayName;
+    }
+
+    public function getDisplayName() {
+
+        return $this->displayName;
+    }
+
+    public function setMail($mail) {
+        $this->mail = $mail;
+    }
+
+    public function getMail() {
+
+        return $this->mail;
+    }
+
+    public function setDn($dn) {
+        $this->dn = $dn;
+    }
+
+    public function getDn() {
+
+        return $this->dn;
     }
 
 }

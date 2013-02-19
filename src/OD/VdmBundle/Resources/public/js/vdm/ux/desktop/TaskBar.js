@@ -13,11 +13,10 @@ Ext.define('Ext.ux.desktop.TaskBar', {
     extend: 'Ext.toolbar.Toolbar', // TODO - make this a basic hbox panel...
 
     requires: [
-        'Ext.button.Button',
-        'Ext.resizer.Splitter',
-        'Ext.menu.Menu',
-
-        'Ext.ux.desktop.StartMenu'
+    'Ext.button.Button',
+    'Ext.resizer.Splitter',
+    'Ext.menu.Menu',
+    'Ext.ux.desktop.StartMenu'
     ],
 
     alias: 'widget.taskbar',
@@ -42,24 +41,26 @@ Ext.define('Ext.ux.desktop.TaskBar', {
         me.tray = new Ext.toolbar.Toolbar(me.getTrayConfig());
 
         me.items = [
-            {
-                xtype: 'button',
-                cls: 'ux-start-button',
-                iconCls: 'ux-start-button-icon',
-                menu: me.startMenu,
-                menuAlign: 'bl-tl',
-                text: me.startBtnText
-            },
-            me.quickStart,
-            {
-                xtype: 'splitter', html: '&#160;',
-                height: 14, width: 2, // TODO - there should be a CSS way here
-                cls: 'x-toolbar-separator x-toolbar-separator-horizontal'
-            },
-            //'-',
-            me.windowBar,
-            '-',
-            me.tray
+        {
+            xtype: 'button',
+            cls: 'ux-start-button',
+            iconCls: 'ux-start-button-icon',
+            menu: me.startMenu,
+            menuAlign: 'bl-tl',
+            text: me.startBtnText
+        },
+        me.quickStart,
+        {
+            xtype: 'splitter', 
+            html: '&#160;',
+            height: 14, 
+            width: 2, // TODO - there should be a CSS way here
+            cls: 'x-toolbar-separator x-toolbar-separator-horizontal'
+        },
+        //'-',
+        me.windowBar,
+        '-',
+        me.tray
         ];
 
         me.callParent();
@@ -86,7 +87,10 @@ Ext.define('Ext.ux.desktop.TaskBar', {
 
         Ext.each(this.quickStart, function (item) {
             ret.items.push({
-                tooltip: { text: item.name, align: 'bl-tl' },
+                tooltip: {
+                    text: item.name, 
+                    align: 'bl-tl'
+                },
                 //tooltip: item.name,
                 overflowText: item.name,
                 iconCls: item.iconCls,
@@ -118,7 +122,9 @@ Ext.define('Ext.ux.desktop.TaskBar', {
             flex: 1,
             cls: 'ux-desktop-windowbar',
             items: [ '&#160;' ],
-            layout: { overflowHandler: 'Scroller' }
+            layout: {
+                overflowHandler: 'Scroller'
+            }
         };
     },
 
@@ -129,7 +135,7 @@ Ext.define('Ext.ux.desktop.TaskBar', {
 
     onQuickStartClick: function (btn) {
         var module = this.app.getModule(btn.module),
-            window;
+        window;
 
         if (module) {
             window = module.createWindow();
@@ -202,61 +208,5 @@ Ext.define('Ext.ux.desktop.TaskBar', {
                 }
             });
         }
-    }
-});
-
-/**
- * @class Ext.ux.desktop.TrayClock
- * @extends Ext.toolbar.TextItem
- * This class displays a clock on the toolbar.
- */
-Ext.define('Ext.ux.desktop.TrayClock', {
-    extend: 'Ext.toolbar.TextItem',
-
-    alias: 'widget.trayclock',
-
-    cls: 'ux-desktop-trayclock',
-
-    html: '&#160;',
-
-    timeFormat: 'g:i A',
-
-    tpl: '{time}',
-
-    initComponent: function () {
-        var me = this;
-
-        me.callParent();
-
-        if (typeof(me.tpl) == 'string') {
-            me.tpl = new Ext.XTemplate(me.tpl);
-        }
-    },
-
-    afterRender: function () {
-        var me = this;
-        Ext.Function.defer(me.updateTime, 100, me);
-        me.callParent();
-    },
-
-    onDestroy: function () {
-        var me = this;
-
-        if (me.timer) {
-            window.clearTimeout(me.timer);
-            me.timer = null;
-        }
-
-        me.callParent();
-    },
-
-    updateTime: function () {
-        var me = this, time = Ext.Date.format(new Date(), me.timeFormat),
-            text = me.tpl.apply({ time: time });
-        if (me.lastText != text) {
-            me.setText(text);
-            me.lastText = text;
-        }
-        me.timer = Ext.Function.defer(me.updateTime, 10000, me);
     }
 });

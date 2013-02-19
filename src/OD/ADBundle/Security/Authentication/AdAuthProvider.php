@@ -5,6 +5,7 @@ namespace OD\ADBundle\Security\Authentication;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use OD\ADBundle\Security\Token\AdUsernamePasswordToken;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use OD\ADBundle\Service\AdldapService;
@@ -15,8 +16,7 @@ use OD\ADBundle\Security\User\AdUser;
  * Authentication provider class
  * Handle Authentication Provider Interface for AD
  */
-class AdAuthProvider implements AuthenticationProviderInterface
-{
+class AdAuthProvider implements AuthenticationProviderInterface {
 
     /**
      * The user provider instance
@@ -44,8 +44,7 @@ class AdAuthProvider implements AuthenticationProviderInterface
      * @param type           $config        the config
      * @param AdldapService  $adldapService the adLdapService
      */
-    public function __construct(AdUserProvider $userProvider, $config, AdldapService $adldapService)
-    {
+    public function __construct(AdUserProvider $userProvider, $config, AdldapService $adldapService) {
         $this->userProvider = $userProvider;
         $this->config = $config;
         $this->adLdapService = $adldapService;
@@ -60,8 +59,7 @@ class AdAuthProvider implements AuthenticationProviderInterface
      *
      * @throws AuthenticationException if the authentication fails
      */
-    public function authenticate(TokenInterface $token)
-    {
+    public function authenticate(TokenInterface $token) {
         $adLdap = $this->adLdapService->getInstance();
         $user = $this->userProvider->loadUserByUsername($token->getUsername());
 
@@ -72,11 +70,14 @@ class AdAuthProvider implements AuthenticationProviderInterface
         $user->setPassword($token->getCredentials());
         $this->userProvider->fetchData($user, $adLdap);
 
-        $newToken = new UsernamePasswordToken(
-                $user,
-                $token->getCredentials(),
-                "active.directory.user.provider",
-                $user->getRoles()
+        $newToken = new AdUsernamePasswordToken(
+                        $user,
+                        $token->getCredentials(),
+                        "active.directory.user.provider",
+                        $user->getRoles(),
+                        $user->getMail(),
+                        $user->getDisplayName(),
+                        $user->getDn()
         );
 
         return $newToken;
@@ -89,8 +90,7 @@ class AdAuthProvider implements AuthenticationProviderInterface
      *
      * @return Boolean true if the implementation supports the Token, false otherwise
      */
-    public function supports(TokenInterface $token)
-    {
+    public function supports(TokenInterface $token) {
         return $token instanceof UsernamePasswordToken;
     }
 

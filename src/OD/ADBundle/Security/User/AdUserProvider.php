@@ -147,6 +147,9 @@ class AdUserProvider implements UserProviderInterface
         }
 
         $user = $adLdap->user()->infoCollection($adUser->getUsername());
+        $adUser->setDisplayName($user->displayname);
+        $adUser->setMail($user->mail);
+        $adUser->setDn($adLdap->user()->dn($adUser->getUsername()));
 
         if ($user) {
             $groups = array();
