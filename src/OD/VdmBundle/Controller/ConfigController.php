@@ -35,14 +35,33 @@ class ConfigController extends Controller {
             $displayName = $admin['d'];
         }
 
+        $translator = $this->get('translator');
+        $logoutLabel = $translator->trans('Deconnexion');
+
         $config = array(
             'config' => array(
+                'settingsLabel' => $translator->trans('Options'),
+                'logoutLabel' => $logoutLabel,
+                'logoutConfirmText' => $translator->trans('Voulez-vous vraiment vous deconnecter?'),
+                'logoutDialogTitle' => $logoutLabel,
                 'logoutUrl' => $this->generateUrl('_logout'),
                 'loggedUser' => array(
                     "username" => $user->getUsername(),
                     "mail" => $mail,
                     "dn" => $dn,
                     "displayName" => $displayName
+                ),
+                'settingsConfig' => array(
+                    'title' => $translator->trans('Options'),
+                    'okLabel' => $translator->trans('Valider'),
+                    'cancelLabel' => $translator->trans('Annuler'),
+                    'stretchLabel' => $translator->trans('Etirer'),
+                    'desktopBackground' => $translator->trans('Personnaliser le papier peint'),
+                    'noneLabel' => $translator->trans('Aucun'),
+                    'previewLabel' => $translator->trans('Apperçu')
+                ),
+                'taskbarConfig' => array(
+                    'startBtnText' => $translator->trans('Démarrer')
                 )
             )
         );

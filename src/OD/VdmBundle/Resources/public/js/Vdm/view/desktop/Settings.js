@@ -12,7 +12,11 @@ Ext.define('Vdm.view.desktop.Settings', {
     ],
 
     layout: 'anchor',
-    title: 'Change Settings',
+     /**
+     * @cfg {String} title
+     * Title of settings Dialog.
+     */
+    title: '',
     modal: true,
     width: 640,
     height: 480,
@@ -29,8 +33,8 @@ Ext.define('Vdm.view.desktop.Settings', {
         me.tree = me.createTree();
 
         me.buttons = [
-            { text: 'OK', handler: me.onOK, scope: me },
-            { text: 'Cancel', handler: me.close, scope: me }
+            { text: me.okLabel, handler: me.onOK, scope: me },
+            { text: me.cancelLabel , handler: me.close, scope: me }
         ];
 
         me.items = [
@@ -42,7 +46,7 @@ Ext.define('Vdm.view.desktop.Settings', {
                     me.tree,
                     {
                         xtype: 'panel',
-                        title: 'Preview',
+                        title: me.previewLabel,
                         region: 'center',
                         layout: 'fit',
                         items: [ me.preview ]
@@ -51,7 +55,7 @@ Ext.define('Vdm.view.desktop.Settings', {
             },
             {
                 xtype: 'checkbox',
-                boxLabel: 'Stretch to fit',
+                boxLabel: me.stretchLabel,
                 checked: me.stretch,
                 listeners: {
                     change: function (comp) {
@@ -72,11 +76,11 @@ Ext.define('Vdm.view.desktop.Settings', {
         }
 
         var tree = new Ext.tree.Panel({
-            title: 'Desktop Background',
+            title: me.desktopBackground,
             rootVisible: false,
             lines: false,
             autoScroll: true,
-            width: 150,
+            width: 200,
             region: 'west',
             split: true,
             minWidth: 100,
@@ -86,12 +90,12 @@ Ext.define('Vdm.view.desktop.Settings', {
                 scope: this
             },
             store: new Ext.data.TreeStore({
-                model: 'Vdm.model.WallpaperModel',
+                model: 'Vdm.model.desktop.WallpaperModel',
                 root: {
                     text:'Wallpaper',
                     expanded: true,
                     children:[
-                        { text: "None", iconCls: '', leaf: true },
+                        { text: me.noneLabel, iconCls: '', leaf: true },
                         child('Blue-Sencha.jpg'),
                         child('Dark-Sencha.jpg'),
                         child('Wood-Sencha.jpg'),

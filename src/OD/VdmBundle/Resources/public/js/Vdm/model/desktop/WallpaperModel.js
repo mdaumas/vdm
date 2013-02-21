@@ -1,4 +1,4 @@
-Ext.define('Vdm.model.WallpaperModel', {
+Ext.define('Vdm.model.desktop.WallpaperModel', {
     extend: 'Ext.data.Model',
     fields: [
         { name: 'text' },

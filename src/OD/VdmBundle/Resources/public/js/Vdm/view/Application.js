@@ -9,7 +9,9 @@
 Ext.define('Vdm.view.Application', {
     extend: 'Vdm.view.desktop.Application',
 
-    requires: [],
+    requires: [
+    'Vdm.view.desktop.Settings'
+    ],
     
     getStartConfig : function() {
         var me = this;
@@ -23,7 +25,13 @@ Ext.define('Vdm.view.Application', {
                 width: 100,
                 items: [
                 {
-                    text:'Logout',
+                    text: me.settingsLabel,
+                    iconCls:'settings',
+                    handler: me.onSettings,
+                    scope: me
+                },
+                {
+                    text: me.logoutLabel,
                     iconCls:'logout',
                     handler: me.onLogout,
                     scope: me
@@ -33,15 +41,35 @@ Ext.define('Vdm.view.Application', {
         });
     },
 
+    /**
+     * Logout handler function
+     */
     onLogout: function () {
         var me = this;
+        
         Ext.Msg.confirm(
-            'Deconnexion', 
-            'Voulez-vous vraiment vous deconnecter?', 
+            me.logoutDialogTitle, 
+            me.logoutConfirmText, 
             function(button){
                 if(button == "yes"){
                     document.location = me.logoutUrl;
                 }
             });
+    },
+    
+    /**
+     * Settings handler function
+     */
+    onSettings: function () {
+        var me = this;
+        
+        var cfg = {
+            desktop: this.desktop
+        };
+        
+        Ext.apply(cfg, me.settingsConfig);
+        
+        var dlg = Ext.create('Vdm.view.desktop.Settings', cfg);
+        dlg.show();
     }
 });

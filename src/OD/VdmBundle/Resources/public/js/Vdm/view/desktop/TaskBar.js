@@ -1,9 +1,11 @@
 /**
  * @class Vdm.view.desktop.TaskBar
  * @extends Ext.toolbar.Toolbar
+ * 
+ * TaskBar Class for the Desktop Application
  */
 Ext.define('Vdm.view.desktop.TaskBar', {
-    extend: 'Ext.toolbar.Toolbar', // TODO - make this a basic hbox panel...
+    extend: 'Ext.toolbar.Toolbar',
 
     requires: [
     'Ext.button.Button',
@@ -22,9 +24,12 @@ Ext.define('Vdm.view.desktop.TaskBar', {
      */
     startBtnText: 'Start',
 
+    /**
+     * Component initalization function
+     */
     initComponent: function () {
         var me = this;
-
+        
         me.startMenu = new Vdm.view.desktop.StartMenu(me.startConfig);
 
         me.quickStart = new Ext.toolbar.Toolbar(me.getQuickStart());
@@ -42,6 +47,7 @@ Ext.define('Vdm.view.desktop.TaskBar', {
             menuAlign: 'bl-tl',
             text: me.startBtnText
         },
+        '-',
         me.quickStart,
         {
             xtype: 'splitter', 
@@ -59,6 +65,9 @@ Ext.define('Vdm.view.desktop.TaskBar', {
         me.callParent();
     },
 
+    /**
+     * Attach the context menu
+     */
     afterLayout: function () {
         var me = this;
         me.callParent();
@@ -66,12 +75,12 @@ Ext.define('Vdm.view.desktop.TaskBar', {
     },
 
     /**
-     * This method returns the configuration object for the Quick Start toolbar. A derived
-     * class can override this method, call the base version to build the config and
-     * then modify the returned object before returning it.
+     * Returns the configuration object for the QuickStart toolbar.
      */
     getQuickStart: function () {
-        var me = this, ret = {
+        var me = this;
+        
+        var ret = {
             minWidth: 20,
             width: 60,
             items: [],
@@ -97,9 +106,7 @@ Ext.define('Vdm.view.desktop.TaskBar', {
     },
 
     /**
-     * This method returns the configuration object for the Tray toolbar. A derived
-     * class can override this method, call the base version to build the config and
-     * then modify the returned object before returning it.
+     * Returns the configuration object for the Tray toolbar. 
      */
     getTrayConfig: function () {
         var ret = {
@@ -107,9 +114,13 @@ Ext.define('Vdm.view.desktop.TaskBar', {
             items: this.trayItems
         };
         delete this.trayItems;
+        
         return ret;
     },
 
+    /**
+     *Returns the configuration object for the WindowBar toolbar. 
+     */
     getWindowBarConfig: function () {
         return {
             flex: 1,
@@ -121,14 +132,20 @@ Ext.define('Vdm.view.desktop.TaskBar', {
         };
     },
 
+    /**
+     * Return the button of a Ext.toolbar.Toolbar
+     */
     getWindowBtnFromEl: function (el) {
         var c = this.windowBar.getChildByElement(el);
         return c || null;
     },
 
+    /**
+     * Manage the click on a QuickStart button 
+     */
     onQuickStartClick: function (btn) {
-        var module = this.app.getModule(btn.module),
-        window;
+        var module = this.app.getModule(btn.module);
+        var window;
 
         if (module) {
             window = module.createWindow();
@@ -136,8 +153,13 @@ Ext.define('Vdm.view.desktop.TaskBar', {
         }
     },
     
+    /**
+     * Manage context menu on WindowBar buttons
+     */
     onButtonContextMenu: function (e) {
-        var me = this, t = e.getTarget(), btn = me.getWindowBtnFromEl(t);
+        var me = this, t = e.getTarget();
+        var btn = me.getWindowBtnFromEl(t);
+        
         if (btn) {
             e.stopEvent();
             me.windowMenu.theWin = btn.win;
@@ -145,6 +167,9 @@ Ext.define('Vdm.view.desktop.TaskBar', {
         }
     },
 
+    /**
+     * Manage click on WindowBar buttons
+     */
     onWindowBtnClick: function (btn) {
         var win = btn.win;
 
@@ -157,6 +182,9 @@ Ext.define('Vdm.view.desktop.TaskBar', {
         }
     },
 
+    /**
+     * Add a button into the WindowBar Toolbar
+     */
     addTaskButton: function(win) {
         var config = {
             iconCls: win.iconCls,
@@ -177,6 +205,9 @@ Ext.define('Vdm.view.desktop.TaskBar', {
         return cmp;
     },
 
+    /**
+     * Remove a button into the WindowBar Toolbar
+     */
     removeTaskButton: function (btn) {
         var found, me = this;
         me.windowBar.items.each(function (item) {
@@ -191,6 +222,9 @@ Ext.define('Vdm.view.desktop.TaskBar', {
         return found;
     },
 
+    /**
+     * Set a button active in the WindowBar Toolbar
+     */
     setActiveButton: function(btn) {
         if (btn) {
             btn.toggle(true);
