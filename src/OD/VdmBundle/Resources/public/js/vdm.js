@@ -1,9 +1,24 @@
-Ext.Loader.setPath(vdm.Constants.LOADER_PATHS);
-
-Ext.require('vdm.view.Application');
-
 var vdmApp;
-        
+
+Ext.Loader.setPath(Vdm.Constants.LOADER_PATHS);
+    
+Ext.require('Vdm.view.Application');
+                
 Ext.onReady(function () {
-    vdmApp = new vdm.view.Application();
+    
+    Ext.Ajax.request({
+        url	: Vdm.Constants.CONFIG_URL,
+        success	: startup,
+        failure	: error
+    });
+    
+    function startup(response){
+        var data = Ext.decode(response.responseText);
+        
+        vdmApp = Ext.create('Vdm.view.Application', data.config);   
+    }
+    
+    function error(){
+        alert('Startup error');
+    }
 });

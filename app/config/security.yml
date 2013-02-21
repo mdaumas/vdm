@@ -1,6 +1,12 @@
 jms_security_extra:
     secure_all_services: false
     expressions: true
+    
+parameters:
+    admin.settings:
+        mail: admin@objetdirect.com
+        displayName: Administrateur
+        dn:
 
 security:
     encoders:
@@ -19,7 +25,6 @@ security:
         in_memory:
             memory:
                 users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
         active_directory_provider:

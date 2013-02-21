@@ -58,18 +58,3 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-# LDAP Configuration
-#od_ldap:
-#    client:
-#        host:            172.30.251.47
-#    user_base_dn:        ou=people, dc=objetdirect, dc=com
-#    user_filter:         (objectClass=user)
-#    username_attribute:  uid
-#    role_base_dn:        ou=Groups,dc=example,dc=com
-#    role_filter:         (objectClass=role)
-#    role_name_attribute: cn
-#    role_user_attribute: memberuid
-#    security:
-#        role_prefix:   ROLE_LDAP_
-#        default_roles: [ROLE_ADMIN, ROLE_LDAP]
