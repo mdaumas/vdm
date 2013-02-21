@@ -1,22 +1,15 @@
-/*!
- * Ext JS Library 4.0
- * Copyright(c) 2006-2011 Sencha Inc.
- * licensing@sencha.com
- * http://www.sencha.com/license
- */
-
 /**
- * @class Ext.ux.desktop.TaskBar
+ * @class Vdm.view.desktop.TaskBar
  * @extends Ext.toolbar.Toolbar
  */
-Ext.define('Ext.ux.desktop.TaskBar', {
+Ext.define('Vdm.view.desktop.TaskBar', {
     extend: 'Ext.toolbar.Toolbar', // TODO - make this a basic hbox panel...
 
     requires: [
     'Ext.button.Button',
     'Ext.resizer.Splitter',
     'Ext.menu.Menu',
-    'Ext.ux.desktop.StartMenu'
+    'Vdm.view.desktop.StartMenu'
     ],
 
     alias: 'widget.taskbar',
@@ -32,7 +25,7 @@ Ext.define('Ext.ux.desktop.TaskBar', {
     initComponent: function () {
         var me = this;
 
-        me.startMenu = new Ext.ux.desktop.StartMenu(me.startConfig);
+        me.startMenu = new Vdm.view.desktop.StartMenu(me.startConfig);
 
         me.quickStart = new Ext.toolbar.Toolbar(me.getQuickStart());
 

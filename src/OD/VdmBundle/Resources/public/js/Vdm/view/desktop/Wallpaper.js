@@ -1,16 +1,9 @@
-/*!
- * Ext JS Library 4.0
- * Copyright(c) 2006-2011 Sencha Inc.
- * licensing@sencha.com
- * http://www.sencha.com/license
- */
-
 /**
- * @class Ext.ux.desktop.Wallpaper
+ * @class Vdm.view.desktop.Wallpaper
  * @extends Ext.Component
  * <p>This component renders an image that stretches to fill the component.</p>
  */
-Ext.define('Ext.ux.desktop.Wallpaper', {
+Ext.define('Vdm.view.desktop.Wallpaper', {
     extend: 'Ext.Component',
 
     alias: 'widget.wallpaper',

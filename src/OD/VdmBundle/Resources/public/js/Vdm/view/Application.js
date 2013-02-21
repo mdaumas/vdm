@@ -1,20 +1,19 @@
+/**
+ * @class Vdm.view.Application
+ * @extends Vdm.view.desktop.Application
+ * 
+ * @author Marc Daumas
+ *
+ * The ExtJs Application class
+ **/
 Ext.define('Vdm.view.Application', {
-    extend: 'Ext.ux.desktop.Application',
+    extend: 'Vdm.view.desktop.Application',
 
     requires: [],
     
-    launch: function(){
-        var me = this;
-		
-        me.addEvents({
-            "ready"	: true
-        });
-
-        me.callParent(arguments);
-    },
-
     getStartConfig : function() {
-        var me = this, ret = me.callParent();
+        var me = this;
+        ret = me.callParent();
 
         return Ext.apply(ret, {
             title: me.loggedUser.displayName,

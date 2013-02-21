@@ -1,16 +1,9 @@
-/*!
- * Ext JS Library 4.0
- * Copyright(c) 2006-2011 Sencha Inc.
- * licensing@sencha.com
- * http://www.sencha.com/license
- */
-
 /**
- * @class Ext.ux.desktop.Desktop
+ * @class Vdm.view.desktop.Desktop
  * @extends Ext.panel.Panel
  * <p>This class manages the wallpaper, shortcuts and taskbar.</p>
  */
-Ext.define('Ext.ux.desktop.Desktop', {
+Ext.define('Vdm.view.desktop.Desktop', {
     extend: 'Ext.panel.Panel',
 
     alias: 'widget.desktop',
@@ -21,8 +14,8 @@ Ext.define('Ext.ux.desktop.Desktop', {
         'Ext.view.View', // dataview
         'Ext.window.Window',
 
-        'Ext.ux.desktop.TaskBar',
-        'Ext.ux.desktop.Wallpaper'
+        'Vdm.view.desktop.TaskBar',
+        'Vdm.view.desktop.Wallpaper'
     ],
 
     activeWindowCls: 'ux-desktop-active-win',
@@ -42,7 +35,7 @@ Ext.define('Ext.ux.desktop.Desktop', {
      * @cfg {Array|Store} shortcuts
      * The items to add to the DataView. This can be a {@link Ext.data.Store Store} or a
      * simple array. Items should minimally provide the fields in the
-     * {@link Ext.ux.desktop.ShorcutModel ShortcutModel}.
+     * {@link Vdm.view.desktop.ShorcutModel ShortcutModel}.
      */
     shortcuts: null,
 
@@ -84,7 +77,7 @@ Ext.define('Ext.ux.desktop.Desktop', {
 
         me.windowMenu = new Ext.menu.Menu(me.createWindowMenu());
 
-        me.bbar = me.taskbar = new Ext.ux.desktop.TaskBar(me.taskbarConfig);
+        me.bbar = me.taskbar = new Vdm.view.desktop.TaskBar(me.taskbarConfig);
         me.taskbar.windowMenu = me.windowMenu;
 
         me.windows = new Ext.util.MixedCollection();

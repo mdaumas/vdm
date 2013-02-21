@@ -1,9 +1,9 @@
 /**
- * @class Ext.ux.desktop.TrayClock
+ * @class Vdm.view.desktop.TrayClock
  * @extends Ext.toolbar.TextItem
  * This class displays a clock on the toolbar.
  */
-Ext.define('Ext.ux.desktop.TrayClock', {
+Ext.define('Vdm.view.desktop.TrayClock', {
     extend: 'Ext.toolbar.TextItem',
 
     alias: 'widget.trayclock',

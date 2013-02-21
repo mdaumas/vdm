@@ -1,44 +1,36 @@
 /**
- *
- * The application class
- *
- *
+ * @class Vdm.view.desktop.Application
+ * @extends Ext.app.Application
+ * 
+ * requires Vdm.view.desktop.Application
+ * @author Marc Daumas
+ * 
+ * The ExtJs Desktop Application Class
  **/
-Ext.define('Ext.ux.desktop.Application', {
+Ext.define('Vdm.view.desktop.Application', {
+    
     extend : "Ext.app.Application",
+    
     mixins: {
         observable: 'Ext.util.Observable'
     },
 
     requires: [
     'Ext.container.Viewport',
-    'Ext.ux.desktop.Desktop'
+    'Vdm.view.desktop.Desktop'
     ],
 
-    isReady: false,
     modules: null,
     useQuickTips: true,
+    getModules: Ext.emptyFn,
 
-/*
-    constructor: function (config) {
-        var me = this;
-        me.addEvents(
-            'ready',
-            'beforeunload'
-            );
-
-        me.mixins.observable.constructor.call(this, config);
-
-        if (Ext.isReady) {
-            Ext.Function.defer(me.init, 10, me);
-        } else {
-            Ext.onReady(me.init, me);
-        }
-    },
-*/
-
+    /**
+     * Called automatically when the page has completely loaded.
+     * This is the Application build starting point
+     */
     launch: function() {
-        var me = this, desktopCfg;
+        var me = this;
+        var desktopCfg;
 
         if (me.useQuickTips) {
             Ext.QuickTips.init();
@@ -50,7 +42,7 @@ Ext.define('Ext.ux.desktop.Application', {
         }
 
         desktopCfg = me.getDesktopConfig();
-        me.desktop = new Ext.ux.desktop.Desktop(desktopCfg);
+        me.desktop = new Vdm.view.desktop.Desktop(desktopCfg);
 
         me.viewport = new Ext.container.Viewport({
             layout: 'fit',
@@ -58,43 +50,45 @@ Ext.define('Ext.ux.desktop.Application', {
         });
 
         Ext.EventManager.on(window, 'beforeunload', me.onUnload, me);
-
-        me.isReady = true;
-        me.fireEvent('ready', me);
     },
 
     /**
-     * This method returns the configuration object for the Desktop object. A derived
-     * class can override this method, call the base version to build the config and
-     * then modify the returned object before returning it.
+     * Returns configuration object for the Desktop. 
      */
     getDesktopConfig: function () {
-        var me = this, cfg = {
+        var me = this;
+        
+        // Get the taskbar config and add application
+        var cfg = {
             app: me,
             taskbarConfig: me.getTaskbarConfig()
         };
 
+        // Merge with desktop config
         Ext.apply(cfg, me.desktopConfig);
+        
         return cfg;
     },
 
-    getModules: Ext.emptyFn,
-
     /**
-     * This method returns the configuration object for the Start Button. A derived
-     * class can override this method, call the base version to build the config and
-     * then modify the returned object before returning it.
+     * Returns configuration object for the Start Button. 
      */
     getStartConfig: function () {
-        var me = this,
-        cfg = {
+        var me = this;
+        var launcher;
+        
+        // Define empty menu and add application
+        var cfg = {
             app: me,
             menu: []
-        },
-        launcher;
-
+        };
+        
+        // Merge with startConfig
         Ext.apply(cfg, me.startConfig);
 
+        // Initialize menu modules launcher handler functions
+        // If the launcher handler function is defined for the module then use it
+        // else use me.createWindow
         Ext.each(me.modules, function (module) {
             launcher = module.launcher;
             if (launcher) {
@@ -106,60 +100,76 @@ Ext.define('Ext.ux.desktop.Application', {
         return cfg;
     },
 
+    /**
+     * Default menu launcher handler function
+     **/
     createWindow: function(module) {
         var window = module.createWindow();
         window.show();
     },
 
     /**
-     * This method returns the configuration object for the TaskBar. A derived class
-     * can override this method, call the base version to build the config and then
-     * modify the returned object before returning it.
+     * Returns the configuration object for the TaskBar. 
      */
     getTaskbarConfig: function () {
-        var me = this, cfg = {
+        var me = this;
+        
+        // Define the Start Config and add application
+        var cfg = {
             app: me,
             startConfig: me.getStartConfig()
         };
 
+        // Merge with Start Config
         Ext.apply(cfg, me.taskbarConfig);
+        
         return cfg;
     },
 
+    /**
+     * Module initialization : add the app property to each module
+     */
     initModules : function(modules) {
         var me = this;
+        
         Ext.each(modules, function (module) {
             module.app = me;
         });
     },
 
+    /**
+     * Return a module by name
+     * 
+     * @var string name the name of the module
+     * 
+     * @return Module object
+     */
     getModule : function(name) {
         var ms = this.modules;
+        
         for (var i = 0, len = ms.length; i < len; i++) {
             var m = ms[i];
             if (m.id == name || m.appType == name) {
+                
                 return m;
             }
         }
         return null;
     },
 
-    onReady : function(fn, scope) {
-        if (this.isReady) {
-            fn.call(scope, this);
-        } else {
-            this.on({
-                ready: fn,
-                scope: scope,
-                single: true
-            });
-        }
-    },
-
+    /**
+     * return the Desktop object
+     * 
+     * @return Desktop
+     */
     getDesktop : function() {
         return this.desktop;
     },
 
+    /**
+     * Unload function
+     * called when application ends
+     */
     onUnload : function(e) {
         if (this.fireEvent('beforeunload', this) === false) {
             e.stopEvent();
