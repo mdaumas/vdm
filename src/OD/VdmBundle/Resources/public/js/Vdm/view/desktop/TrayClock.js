@@ -12,8 +12,18 @@ Ext.define('Vdm.view.desktop.TrayClock', {
     cls: 'ux-desktop-trayclock',
 
     html: '&#160;',
-
+    
+    /**
+     * @cfg {String} title
+     * The Clock Time format.
+     */
     timeFormat: 'g:i A',
+    
+    /**
+     * @cfg {String} title
+     * The Clock Update Time Delay.
+     */
+    updateTimeDelay : 10000,
 
     tpl: '{time}',
 
@@ -67,6 +77,6 @@ Ext.define('Vdm.view.desktop.TrayClock', {
             me.setText(text);
             me.lastText = text;
         }
-        me.timer = Ext.Function.defer(me.updateTime, 1000, me);
+        me.timer = Ext.Function.defer(me.updateTime, me.updateTimeDelay, me);
     }
 });

@@ -72,7 +72,8 @@ class ConfigController extends Controller {
                     'startBtnText' => $translator->trans('Démarrer')
                 ),
                 'trayConfig' => array(
-                    'timeFormat' => 'H:i:s'
+                    'timeFormat' => 'H:i:s',
+                    'updateTimeDelay' => '1000'
                 )
             )
         );
