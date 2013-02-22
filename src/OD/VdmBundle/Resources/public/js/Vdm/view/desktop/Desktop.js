@@ -9,13 +9,13 @@ Ext.define('Vdm.view.desktop.Desktop', {
     alias: 'widget.desktop',
 
     uses: [
-        'Ext.util.MixedCollection',
-        'Ext.menu.Menu',
-        'Ext.view.View', // dataview
-        'Ext.window.Window',
+    'Ext.util.MixedCollection',
+    'Ext.menu.Menu',
+    'Ext.view.View', // dataview
+    'Ext.window.Window',
 
-        'Vdm.view.desktop.TaskBar',
-        'Vdm.view.desktop.Wallpaper'
+    'Vdm.view.desktop.TaskBar',
+    'Vdm.view.desktop.Wallpaper'
     ],
 
     activeWindowCls: 'ux-desktop-active-win',
@@ -53,15 +53,15 @@ Ext.define('Vdm.view.desktop.Desktop', {
      * {@link shortcutItemSelect} will probably also need to changed.
      */
     shortcutTpl: [
-        '<tpl for=".">',
-            '<div class="ux-desktop-shortcut" id="{name}-shortcut">',
-                '<div class="ux-desktop-shortcut-icon {iconCls}">',
-                    '<img src="',Ext.BLANK_IMAGE_URL,'" title="{name}">',
-                '</div>',
-                '<span class="ux-desktop-shortcut-text">{name}</span>',
-            '</div>',
-        '</tpl>',
-        '<div class="x-clear"></div>'
+    '<tpl for=".">',
+    '<div class="ux-desktop-shortcut" id="{name}-shortcut">',
+    '<div class="ux-desktop-shortcut-icon {iconCls}">',
+    '<img src="',Ext.BLANK_IMAGE_URL,'" title="{name}">',
+    '</div>',
+    '<span class="ux-desktop-shortcut-text">{name}</span>',
+    '</div>',
+    '</tpl>',
+    '<div class="x-clear"></div>'
     ],
 
     /**
@@ -72,6 +72,9 @@ Ext.define('Vdm.view.desktop.Desktop', {
 
     windowMenu: null,
 
+    /**
+     * Initialize the desktop component
+     */
     initComponent: function () {
         var me = this;
 
@@ -85,8 +88,11 @@ Ext.define('Vdm.view.desktop.Desktop', {
         me.contextMenu = new Ext.menu.Menu(me.createDesktopMenu());
 
         me.items = [
-            { xtype: 'wallpaper', id: me.id+'_wallpaper' },
-            me.createDataView()
+        {
+            xtype: 'wallpaper', 
+            id: me.id+'_wallpaper'
+        },
+        me.createDataView()
         ];
 
         me.callParent();
@@ -110,6 +116,9 @@ Ext.define('Vdm.view.desktop.Desktop', {
     //------------------------------------------------------
     // Overrideable configuration creation methods
 
+    /**
+     * Desktop data view
+     */
     createDataView: function () {
         var me = this;
         return {
@@ -121,11 +130,15 @@ Ext.define('Vdm.view.desktop.Desktop', {
             style: {
                 position: 'absolute'
             },
-            x: 0, y: 0,
+            x: 0, 
+            y: 0,
             tpl: new Ext.XTemplate(me.shortcutTpl)
         };
     },
 
+    /**
+     * Create Desktop context menu
+     */
     createDesktopMenu: function () {
         var me = this, ret = {
             items: me.contextMenuItems || []
@@ -136,22 +149,51 @@ Ext.define('Vdm.view.desktop.Desktop', {
         }
 
         ret.items.push(
-                { text: 'Tile', handler: me.tileWindows, scope: me, minWindows: 1 },
-                { text: 'Cascade', handler: me.cascadeWindows, scope: me, minWindows: 1 })
+        {
+            text: me.contextMenuTileLabel, 
+            handler: me.tileWindows, 
+            scope: me, 
+            minWindows: 1
+        },
+        {
+            text: me.contextMenuCascadeLabel, 
+            handler: me.cascadeWindows, 
+            scope: me, 
+            minWindows: 1
+        })
 
         return ret;
     },
 
+    /**
+     * Create Window context menu
+     */
     createWindowMenu: function () {
         var me = this;
         return {
             defaultAlign: 'br-tr',
             items: [
-                { text: 'Restore', handler: me.onWindowMenuRestore, scope: me },
-                { text: 'Minimize', handler: me.onWindowMenuMinimize, scope: me },
-                { text: 'Maximize', handler: me.onWindowMenuMaximize, scope: me },
-                '-',
-                { text: 'Close', handler: me.onWindowMenuClose, scope: me }
+            {
+                text: me.createWindowRestoreLabel, 
+                handler: me.onWindowMenuRestore, 
+                scope: me
+            },
+            {
+                text: me.createWindowMinimizeLabel, 
+                handler: me.onWindowMenuMinimize, 
+                scope: me
+            },
+            {
+                text: me.createWindowMaximizeLabel, 
+                handler: me.onWindowMenuMaximize, 
+                scope: me
+            },
+            '-',
+            {
+                text: me.createWindowCloseLabel, 
+                handler: me.onWindowMenuClose, 
+                scope: me
+            }
             ],
             listeners: {
                 beforeshow: me.onWindowMenuBeforeShow,
@@ -161,9 +203,9 @@ Ext.define('Vdm.view.desktop.Desktop', {
         };
     },
 
-    //------------------------------------------------------
-    // Event handler methods
-
+    /**
+     * Display Desktop context menu 
+     */
     onDesktopMenu: function (e) {
         var me = this, menu = me.contextMenu;
         e.stopEvent();
@@ -174,6 +216,9 @@ Ext.define('Vdm.view.desktop.Desktop', {
         menu.doConstrain();
     },
 
+    /**
+     * Enable desktop context menu items
+     */
     onDesktopMenuBeforeShow: function (menu) {
         var me = this, count = me.windows.getCount();
 
@@ -183,15 +228,21 @@ Ext.define('Vdm.view.desktop.Desktop', {
         });
     },
 
+    /**
+     * Manage click on desktop shortcut
+     */
     onShortcutItemClick: function (dataView, record) {
         var me = this, module = me.app.getModule(record.data.module),
-            win = module && module.createWindow();
+        win = module && module.createWindow();
 
         if (win) {
             me.restoreWindow(win);
         }
     },
 
+    /**
+     * Remove TaskBar button of Window
+     */
     onWindowClose: function(win) {
         var me = this;
         me.windows.remove(win);
@@ -199,59 +250,85 @@ Ext.define('Vdm.view.desktop.Desktop', {
         me.updateActiveWindow();
     },
 
-    //------------------------------------------------------
-    // Window context menu handlers
-
+    /**
+     * Desable Window Menu items
+     */
     onWindowMenuBeforeShow: function (menu) {
-        var items = menu.items.items, win = menu.theWin;
+        var items = menu.items.items;
+        var win = menu.theWin;
+        
         items[0].setDisabled(win.maximized !== true && win.hidden !== true); // Restore
         items[1].setDisabled(win.minimized === true); // Minimize
         items[2].setDisabled(win.maximized === true || win.hidden === true); // Maximize
     },
 
+    /**
+     * Handle click on Close Window Menu Item
+     */
     onWindowMenuClose: function () {
-        var me = this, win = me.windowMenu.theWin;
+        var me = this;
+        var win = me.windowMenu.theWin;
 
         win.close();
     },
 
+    /**
+     * Hide Window Menu
+     */
     onWindowMenuHide: function (menu) {
         menu.theWin = null;
     },
 
+    /**
+     * Handle click on Maximize Window menu Item
+     */
     onWindowMenuMaximize: function () {
-        var me = this, win = me.windowMenu.theWin;
+        var me = this;
+        var win = me.windowMenu.theWin;
 
         win.maximize();
         win.toFront();
     },
 
+    /**
+     * Handle click on Minimize Window menu Item
+     */
     onWindowMenuMinimize: function () {
         var me = this, win = me.windowMenu.theWin;
 
         win.minimize();
     },
 
+    /**
+     * Handle click on Restore Window menu Item
+     */
     onWindowMenuRestore: function () {
-        var me = this, win = me.windowMenu.theWin;
+        var me = this;
+        var win = me.windowMenu.theWin;
 
         me.restoreWindow(win);
     },
 
-    //------------------------------------------------------
-    // Dynamic (re)configuration methods
-
+    /**
+     * Return current wallpaper
+     */
     getWallpaper: function () {
+        
         return this.wallpaper.wallpaper;
     },
 
+    /**
+     * Set size of Windows resizer 
+     */
     setTickSize: function(xTickSize, yTickSize) {
-        var me = this,
-            xt = me.xTickSize = xTickSize,
-            yt = me.yTickSize = (arguments.length > 1) ? yTickSize : xt;
+        var me = this;
+        var xt = me.xTickSize = xTickSize;
+        var yt = me.yTickSize = (arguments.length > 1) ? yTickSize : xt;
 
         me.windows.each(function(win) {
-            var dd = win.dd, resizer = win.resizer;
+            var dd = win.dd;
+            var resizer = win.resizer;
+            
             dd.xTickSize = xt;
             dd.yTickSize = yt;
             resizer.widthIncrement = xt;
@@ -259,17 +336,21 @@ Ext.define('Vdm.view.desktop.Desktop', {
         });
     },
 
+    /**
+     * Set the Desktop Wallpaper
+     */
     setWallpaper: function (wallpaper, stretch) {
         this.wallpaper.setWallpaper(wallpaper, stretch);
+        
         return this;
     },
 
-    //------------------------------------------------------
-    // Window management methods
-
+    /**
+     * Cascade Windows
+     */
     cascadeWindows: function() {
         var x = 0, y = 0,
-            zmgr = this.getDesktopZIndexManager();
+        zmgr = this.getDesktopZIndexManager();
 
         zmgr.eachBottomUp(function(win) {
             if (win.isWindow && win.isVisible() && !win.maximized) {
@@ -280,14 +361,19 @@ Ext.define('Vdm.view.desktop.Desktop', {
         });
     },
 
+    /**
+     * Create a new Window on Desktop
+     */
     createWindow: function(config, cls) {
-        var me = this, win, cfg = Ext.applyIf(config || {}, {
-                stateful: false,
-                isWindow: true,
-                constrainHeader: true,
-                minimizable: true,
-                maximizable: true
-            });
+        var me = this;
+        var win;
+        var cfg = Ext.applyIf(config || {}, {
+            stateful: false,
+            isWindow: true,
+            constrainHeader: true,
+            minimizable: true,
+            maximizable: true
+        });
 
         cls = cls || Ext.window.Window;
         win = me.add(new cls(cfg));
@@ -335,9 +421,12 @@ Ext.define('Vdm.view.desktop.Desktop', {
         return win;
     },
 
+    /**
+     * Return the Desktop active window based on zindex
+     */
     getActiveWindow: function () {
         var win = null,
-            zmgr = this.getDesktopZIndexManager();
+        zmgr = this.getDesktopZIndexManager();
 
         if (zmgr) {
             // We cannot rely on activate/deactive because that fires against non-Window
@@ -355,21 +444,33 @@ Ext.define('Vdm.view.desktop.Desktop', {
         return win;
     },
 
+    /**
+     * Return the Zindex manager
+     */
     getDesktopZIndexManager: function () {
         var windows = this.windows;
         // TODO - there has to be a better way to get this...
         return (windows.getCount() && windows.getAt(0).zIndexManager) || null;
     },
 
+    /**
+     * Get Window by id
+     */
     getWindow: function(id) {
         return this.windows.get(id);
     },
 
+    /**
+     * Minimize a Window
+     */
     minimizeWindow: function(win) {
         win.minimized = true;
         win.hide();
     },
 
+    /**
+     * Restore a Window
+     */
     restoreWindow: function (win) {
         if (win.isVisible()) {
             win.restore();
@@ -380,9 +481,15 @@ Ext.define('Vdm.view.desktop.Desktop', {
         return win;
     },
 
+    /**
+     * Tile Desktop Windows
+     */
     tileWindows: function() {
-        var me = this, availWidth = me.body.getWidth(true);
-        var x = me.xTickSize, y = me.yTickSize, nextY = y;
+        var me = this;
+        var availWidth = me.body.getWidth(true);
+        var x = me.xTickSize;
+        var y = me.yTickSize;
+        var nextY = y;
 
         me.windows.each(function(win) {
             if (win.isVisible() && !win.maximized) {
@@ -402,8 +509,14 @@ Ext.define('Vdm.view.desktop.Desktop', {
         });
     },
 
+    /**
+     * Visualy activate a Window
+     */
     updateActiveWindow: function () {
-        var me = this, activeWindow = me.getActiveWindow(), last = me.lastActiveWindow;
+        var me = this;
+        var activeWindow = me.getActiveWindow();
+        var last = me.lastActiveWindow;
+        
         if (activeWindow === last) {
             return;
         }

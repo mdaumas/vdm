@@ -51,6 +51,14 @@ class ConfigController extends Controller {
                     "dn" => $dn,
                     "displayName" => $displayName
                 ),
+                'desktopConfig' => array(
+                    'contextMenuTileLabel' => $translator->trans('Empiler'),
+                    'contextMenuCascadeLabel' => $translator->trans('Cascade'),
+                    'createWindowRestoreLabel' => $translator->trans('Restaurer'),
+                    'createWindowMinimizeLabel' => $translator->trans('Reduire'),
+                    'createWindowMaximizeLabel' => $translator->trans('Agrandir'),
+                    'createWindowCloseLabel' => $translator->trans('Fermer')
+                ),
                 'settingsConfig' => array(
                     'title' => $translator->trans('Options'),
                     'okLabel' => $translator->trans('Valider'),
@@ -62,6 +70,9 @@ class ConfigController extends Controller {
                 ),
                 'taskbarConfig' => array(
                     'startBtnText' => $translator->trans('Démarrer')
+                ),
+                'trayConfig' => array(
+                    'timeFormat' => 'H:i:s'
                 )
             )
         );

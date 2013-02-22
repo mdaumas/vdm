@@ -1,6 +1,7 @@
 /**
  * @class Vdm.view.desktop.TrayClock
  * @extends Ext.toolbar.TextItem
+ * 
  * This class displays a clock on the toolbar.
  */
 Ext.define('Vdm.view.desktop.TrayClock', {
@@ -16,6 +17,9 @@ Ext.define('Vdm.view.desktop.TrayClock', {
 
     tpl: '{time}',
 
+    /**
+     * Component initialization
+     */
     initComponent: function () {
         var me = this;
 
@@ -26,12 +30,18 @@ Ext.define('Vdm.view.desktop.TrayClock', {
         }
     },
 
+    /**
+     * After Render attach update at 100ms
+     */
     afterRender: function () {
         var me = this;
         Ext.Function.defer(me.updateTime, 100, me);
         me.callParent();
     },
 
+    /**
+     * Handle Toolbar destroy ; clear the timer
+     */
     onDestroy: function () {
         var me = this;
 
@@ -43,15 +53,20 @@ Ext.define('Vdm.view.desktop.TrayClock', {
         me.callParent();
     },
 
+    /**
+     * Draw current time then attach new update at 1s
+     */
     updateTime: function () {
-        var me = this, time = Ext.Date.format(new Date(), me.timeFormat),
-        text = me.tpl.apply({
+        var me = this;
+        var time = Ext.Date.format(new Date(), me.timeFormat);
+        var text = me.tpl.apply({
             time: time
         });
+        
         if (me.lastText != text) {
             me.setText(text);
             me.lastText = text;
         }
-        me.timer = Ext.Function.defer(me.updateTime, 10000, me);
+        me.timer = Ext.Function.defer(me.updateTime, 1000, me);
     }
 });

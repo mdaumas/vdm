@@ -10,7 +10,8 @@ Ext.define('Vdm.view.Application', {
     extend: 'Vdm.view.desktop.Application',
 
     requires: [
-    'Vdm.view.desktop.Settings'
+    'Vdm.view.desktop.Settings',
+    'Vdm.view.desktop.TrayClock'
     ],
     
     getStartConfig : function() {
@@ -55,6 +56,25 @@ Ext.define('Vdm.view.Application', {
                     document.location = me.logoutUrl;
                 }
             });
+    },
+
+    /**
+     * Add Clock to the TaskBar config
+     */
+    getTaskbarConfig: function () {
+        var me = this;
+        var ret = this.callParent();       
+        var trayCfg = {
+            flex: 1
+        };
+        
+        Ext.apply(trayCfg, me.trayConfig);
+
+        return Ext.apply(ret, {
+            trayItems: [
+            Ext.create('Vdm.view.desktop.TrayClock', trayCfg)
+            ]
+        });
     },
     
     /**
