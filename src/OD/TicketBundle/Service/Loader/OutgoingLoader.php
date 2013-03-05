@@ -3,28 +3,34 @@
 namespace OD\TicketBundle\Service\Loader;
 
 use OD\TicketBundle\Entity\PhoneLine;
-use OD\TicketBundle\Entity\IncomingCall;
+use OD\TicketBundle\Entity\OutgoingCall;
 
 /**
- * Incoming Call csv file reader
+ * Outgoing Call csv file reader
  *
  * @author Marc Daumas <mdaumas@objetdirect.com>
  */
-Class IncomingLoader extends CsvLoader
+Class OutgoingLoader extends CsvLoader
 {
 
     const PHONE_LINE = 0;
     const DATE = 1;
     const DURATION = 2;
-    const CALLING_NUMBER = 3;
+    const CALLED_NUMBER = 3;
     const NATURE = 4;
-    const D = 5;
-    const T = 6;
-    const IDKEY = 7;
+    const TYPE = 5;
+    const DESTINATION = 6;
+    const PRICE = 7;
+    const D = 8;
+    const T = 9;
+    const DESIGNATION = 10;
+    const IDKEY = 11;
+    const CALLING_NUMBER = 12;
+    const DIALED_NUMBER = 13;
     /**
      * Record count
      */
-    const RECORD_COUNT = 8;
+    const RECORD_COUNT = 14;
 
     /**
      * The entity manager
@@ -72,15 +78,21 @@ Class IncomingLoader extends CsvLoader
             );
         }
 
-        $incomingCall = new IncomingCall();
-        $incomingCall->setPhoneLine($this->getPhoneLine($fields[self::PHONE_LINE]));
-        $incomingCall->setDate($this->getDate($fields[self::DATE]));
-        $incomingCall->setDuration($fields[self::DURATION]);
-        $incomingCall->setCallingNumber($fields[self::CALLING_NUMBER]);
-        $incomingCall->setNature($this->getNature($fields[self::NATURE]));
-        $incomingCall->setIdkey($fields[self::IDKEY]);
+        $outgoingCall = new OutgoingCall();
+        $outgoingCall->setPhoneLine($this->getPhoneLine($fields[self::PHONE_LINE]));
+        $outgoingCall->setDate($this->getDate($fields[self::DATE]));
+        $outgoingCall->setDuration($fields[self::DURATION]);
+        $outgoingCall->setCalledNumber($fields[self::CALLED_NUMBER]);
+        $outgoingCall->setNature($this->getNature($fields[self::NATURE]));
+        $outgoingCall->setType($this->getType($fields[self::TYPE]));
+        $outgoingCall->setDestination($fields[self::DESTINATION]);
+        $outgoingCall->setPrice($fields[self::PRICE]);
+        $outgoingCall->setDesignation($fields[self::DESIGNATION]);
+        $outgoingCall->setIdkey($fields[self::IDKEY]);
+        $outgoingCall->setCallingNumber($fields[self::CALLING_NUMBER]);
+        $outgoingCall->setDialedNumber($fields[self::DIALED_NUMBER]);
 
-        $this->eManager->persist($incomingCall);
+        $this->eManager->persist($outgoingCall);
 
         $this->parsed++;
     }
@@ -144,20 +156,41 @@ Class IncomingLoader extends CsvLoader
      *
      * @param string $nature
      *
-     * @return int IncomingCall::NATURE
+     * @return int OutgoingCall::NATURE
      */
     public function getNature($nature)
     {
         switch ($nature) {
-            case 'incoming' :
-                return IncomingCall::NATURE_INCOMING;
-            case 'miss' :
-                return IncomingCall::NATURE_MISS;
             case 'transfert' :
-                return IncomingCall::NATURE_TRANSFERT;
+                return OutgoingCall::NATURE_TRANSFERT;
+            case 'national' :
+                return OutgoingCall::NATURE_NATIONAL;
+            case 'international' :
+                return OutgoingCall::NATURE_INTERNATIONAL;
         }
 
         throw new \Exception('Unknown nature : ' . $nature);
+    }
+
+    /**
+     * Return type enum from type string
+     *
+     * @param string $type
+     *
+     * @return int IncomingCall::NATURE
+     */
+    public function getType($type)
+    {
+        switch ($type) {
+            case 'landLine' :
+                return OutgoingCall::TYPE_LANDLINE;
+            case 'mobile' :
+                return OutgoingCall::TYPE_MOBILE;
+            case 'special' :
+                return OutgoingCall::TYPE_SPECIAL;
+        }
+
+        throw new \Exception('Unknown type : ' . $type);
     }
 
 }
