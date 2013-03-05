@@ -22,7 +22,6 @@ Ext.define('Vdm.view.Application', {
         var modules = [];
 
         Ext.each(me.modulesConfig, function (moduleConfig) {
-            Ext.Loader.setPath(moduleConfig.name, moduleConfig.path);
             var module = Ext.create(moduleConfig.name + '.Module', moduleConfig);
             modules.push(module);
         });

@@ -1,9 +1,10 @@
 jms_security_extra:
     secure_all_services: false
     expressions: true
-    
+
 parameters:
     admin.settings:
+        username: admin
         mail: admin@objetdirect.com
         displayName: Administrateur
         dn:

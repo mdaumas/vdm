@@ -19,7 +19,7 @@ class ODTicketBundle extends Bundle
     public function boot()
     {
         $translator = $this->container->get('translator');
-        $moduleManagerService = $this->container->get('module.manager.service');
+        $moduleManager = $this->container->get('module.manager');
 
         $ticketModule = new TicketModule();
         $ticketModule->setName('Ticket');
@@ -31,7 +31,7 @@ class ODTicketBundle extends Bundle
             )
         ));
 
-        $moduleManagerService->registerModule($ticketModule);
+        $moduleManager->registerModule($ticketModule);
     }
 
 }

@@ -19,16 +19,26 @@ Statistiques téléphoniques Viséo
 
 {% block constants %}
 <script type="text/javascript">
-    
+
 Ext.define("Vdm.Constants",{
     singleton	: true,
-    
+
     LOADER_PATHS : {
         Vdm : "{{ vdm_src|default('') }}",
-        Ext:  "{{ ext_src|default('') }}"
+        Ext:  "{{ ext_src|default('') }}",
+    {% for module in modules%}
+        {{module.name}} : "{{module.path}}",
+    {% endfor %}
     },
-    
+
+    REQUIRES : [
+        'Vdm.view.Application',
+    {% for module in modules%}
+        '{{module.name}}.Module',
+    {% endfor %}
+    ],
+
     CONFIG_URL : "{{ path('vdm_config') }}",
-});	
+});
 </script>
 {% endblock constants %}

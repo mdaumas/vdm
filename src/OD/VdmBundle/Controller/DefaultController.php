@@ -27,7 +27,8 @@ class DefaultController extends Controller
 
         return array(
             'vdm_src' => $vdmSrc,
-            'ext_src' => $vdmSrc
+            'ext_src' => $vdmSrc,
+            'modules' => $this->get('module.manager')->getModules()
         );
     }
 

@@ -1,7 +1,12 @@
 parameters:
-    module_manager_service.class: OD\VdmBundle\Service\ModuleManagerService
+    module_manager_service.class: OD\VdmBundle\Service\ModuleManager
+    config_manager_service.class: OD\VdmBundle\Service\ConfigManager
 
 services:
-    module.manager.service:
-        class: "%module_manager_service.class%"
+    module.manager:
+        class: '%module_manager_service.class%'
         arguments:
+    config.manager:
+        class: '%config_manager_service.class%'
+        arguments: ['@module.manager', '@translator']
+

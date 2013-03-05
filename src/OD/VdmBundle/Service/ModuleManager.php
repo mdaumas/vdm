@@ -6,9 +6,11 @@ use OD\VdmBundle\Module\VdmModule;
 use OD\VdmBundle\Module\VdmModuleAlreadyRegisteredException;
 
 /**
- * Vdm Module management class
+ * Configuration manager for Vdm modules
+ *
+ * @author Marc Daumas <mdaumas@objetdirect.com>
  */
-class ModuleManagerService
+class ModuleManager
 {
 
     /**
@@ -40,7 +42,7 @@ class ModuleManagerService
     public function getModules()
     {
 
-        return $this->modules;
+        return array_values($this->modules);
     }
 
 }
