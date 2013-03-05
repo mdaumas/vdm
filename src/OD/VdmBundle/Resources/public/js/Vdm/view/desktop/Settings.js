@@ -2,17 +2,17 @@ Ext.define('Vdm.view.desktop.Settings', {
     extend: 'Ext.window.Window',
 
     uses: [
-        'Ext.tree.Panel',
-        'Ext.tree.View',
-        'Ext.form.field.Checkbox',
-        'Ext.layout.container.Anchor',
-        'Ext.layout.container.Border',
-        'Vdm.view.desktop.Wallpaper',
-        'Vdm.model.desktop.WallpaperModel'
+    'Ext.tree.Panel',
+    'Ext.tree.View',
+    'Ext.form.field.Checkbox',
+    'Ext.layout.container.Anchor',
+    'Ext.layout.container.Border',
+    'Vdm.view.desktop.Wallpaper',
+    'Vdm.model.desktop.WallpaperModel'
     ],
 
     layout: 'anchor',
-     /**
+    /**
      * @cfg {String} title
      * Title of settings Dialog.
      */
@@ -33,36 +33,44 @@ Ext.define('Vdm.view.desktop.Settings', {
         me.tree = me.createTree();
 
         me.buttons = [
-            { text: me.okLabel, handler: me.onOK, scope: me },
-            { text: me.cancelLabel , handler: me.close, scope: me }
+        {
+            text: me.okLabel,
+            handler: me.onOK,
+            scope: me
+        },
+        {
+            text: me.cancelLabel ,
+            handler: me.close,
+            scope: me
+        }
         ];
 
         me.items = [
+        {
+            anchor: '0 -30',
+            border: false,
+            layout: 'border',
+            items: [
+            me.tree,
             {
-                anchor: '0 -30',
-                border: false,
-                layout: 'border',
-                items: [
-                    me.tree,
-                    {
-                        xtype: 'panel',
-                        title: me.previewLabel,
-                        region: 'center',
-                        layout: 'fit',
-                        items: [ me.preview ]
-                    }
-                ]
-            },
-            {
-                xtype: 'checkbox',
-                boxLabel: me.stretchLabel,
-                checked: me.stretch,
-                listeners: {
-                    change: function (comp) {
-                        me.stretch = comp.checked;
-                    }
+                xtype: 'panel',
+                title: me.previewLabel,
+                region: 'center',
+                layout: 'fit',
+                items: [ me.preview ]
+            }
+            ]
+        },
+        {
+            xtype: 'checkbox',
+            boxLabel: me.stretchLabel,
+            checked: me.stretch,
+            listeners: {
+                change: function (comp) {
+                    me.stretch = comp.checked;
                 }
             }
+        }
         ];
 
         me.callParent();
@@ -72,7 +80,12 @@ Ext.define('Vdm.view.desktop.Settings', {
         var me = this;
 
         function child (img) {
-            return { img: img, text: me.getTextOfWallpaper(img), iconCls: '', leaf: true };
+            return {
+                img: img,
+                text: me.getTextOfWallpaper(img),
+                iconCls: '',
+                leaf: true
+            };
         }
 
         var tree = new Ext.tree.Panel({
@@ -85,7 +98,10 @@ Ext.define('Vdm.view.desktop.Settings', {
             split: true,
             minWidth: 100,
             listeners: {
-                afterrender: { fn: this.setInitialSelection, delay: 100 },
+                afterrender: {
+                    fn: this.setInitialSelection,
+                    delay: 100
+                },
                 select: this.onSelect,
                 scope: this
             },
@@ -95,15 +111,19 @@ Ext.define('Vdm.view.desktop.Settings', {
                     text:'Wallpaper',
                     expanded: true,
                     children:[
-                        { text: me.noneLabel, iconCls: '', leaf: true },
-                        child('Blue-Sencha.jpg'),
-                        child('Dark-Sencha.jpg'),
-                        child('Wood-Sencha.jpg'),
-                        child('blue.jpg'),
-                        child('desk.jpg'),
-                        child('desktop.jpg'),
-                        child('desktop2.jpg'),
-                        child('sky.jpg')
+                    {
+                        text: me.noneLabel,
+                        iconCls: '',
+                        leaf: true
+                    },
+                    child('Blue-Sencha.jpg'),
+                    child('Dark-Sencha.jpg'),
+                    child('Wood-Sencha.jpg'),
+                    child('blue.jpg'),
+                    child('desk.jpg'),
+                    child('desktop.jpg'),
+                    child('desktop2.jpg'),
+                    child('sky.jpg')
                     ]
                 }
             })
@@ -113,7 +133,9 @@ Ext.define('Vdm.view.desktop.Settings', {
     },
 
     getTextOfWallpaper: function (path) {
-        var text = path, slash = path.lastIndexOf('/');
+        var text = path;
+        var slash = path.lastIndexOf('/');
+
         if (slash >= 0) {
             text = text.substring(slash+1);
         }
@@ -125,6 +147,7 @@ Ext.define('Vdm.view.desktop.Settings', {
 
     onOK: function () {
         var me = this;
+
         if (me.selected) {
             me.desktop.setWallpaper(me.selected, me.stretch);
         }
@@ -135,7 +158,7 @@ Ext.define('Vdm.view.desktop.Settings', {
         var me = this;
 
         if (record.data.img) {
-            me.selected = 'wallpapers/' + record.data.img;
+            me.selected = me.wallpaperLocation + '/wallpapers/' + record.data.img;
         } else {
             me.selected = Ext.BLANK_IMAGE_URL;
         }
@@ -144,9 +167,11 @@ Ext.define('Vdm.view.desktop.Settings', {
     },
 
     setInitialSelection: function () {
+        var me = this;
         var s = this.desktop.getWallpaper();
+        
         if (s) {
-            var path = '/Wallpaper/' + this.getTextOfWallpaper(s);
+            var path = me.wallpaperLocation + '/wallpaper/' + this.getTextOfWallpaper(s);
             this.tree.selectPath(path, 'text');
         }
     }

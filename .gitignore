@@ -6,3 +6,5 @@ vendor
 composer.phar
 /nbproject/
 /web/bundles/
+/web/css/
+/web/js/

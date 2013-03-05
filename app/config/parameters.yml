@@ -2,6 +2,7 @@ parameters:
     base_src: http://localhost/vdm
     vdm_src: "%base_src%/web/bundles/odvdm/js/Vdm"
     ticket_src: "%base_src%/web/bundles/odticket/js/Ticket"
+    wallpaper_location: "%base_src%/web/bundles/odvdm/images"
 
     database_driver:     pdo_mysql
     database_host:       127.0.0.1

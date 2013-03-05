@@ -31,7 +31,9 @@ Ext.define('Vdm.view.desktop.Wallpaper', {
     },
 
     getState: function () {
-        return this.wallpaper && { wallpaper: this.wallpaper };
+        return this.wallpaper && {
+            wallpaper: this.wallpaper
+        };
     },
 
     setWallpaper: function (wallpaper, stretch) {

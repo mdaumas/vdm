@@ -27,6 +27,13 @@ class ConfigManager
     protected $translator;
 
     /**
+     * The service container
+     *
+     * @var ContainerInterface
+     */
+    protected $container;
+
+    /**
      * The controller
      *
      * @var Controller
@@ -66,11 +73,13 @@ class ConfigManager
      *
      * @param ModuleManager      $moduleManager
      * @param Translator         $translator
+     * @param ContainerInterface $container
      */
-    public function __construct($moduleManager, $translator)
+    public function __construct($moduleManager, $translator, $container)
     {
         $this->moduleManager = $moduleManager;
         $this->translator = $translator;
+        $this->container = $container;
     }
 
     /**
@@ -157,7 +166,8 @@ class ConfigManager
             'stretchLabel'      => $this->translator->trans('Etirer'),
             'desktopBackground' => $this->translator->trans('Personnaliser le papier peint'),
             'noneLabel'         => $this->translator->trans('Aucun'),
-            'previewLabel'      => $this->translator->trans('Apperçu')
+            'previewLabel'      => $this->translator->trans('Apperçu'),
+            'wallpaperLocation' => $this->container->getParameter('wallpaper_location')
         );
     }
 
