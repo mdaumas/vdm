@@ -1,9 +1,9 @@
 var vdmApp;
 
-// Déclaration du path de départ
+// Les paths de l'application'
 Ext.Loader.setPath(Vdm.Constants.LOADER_PATHS);
 
-// Classe de départ de construction de l'application
+// Les requires nécessaires : en gros Vdm + les modules
 Ext.require(Vdm.Constants.REQUIRES);
 
 // Démarrage effectif

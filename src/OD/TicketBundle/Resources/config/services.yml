@@ -1,0 +1,11 @@
+parameters:
+    incoming_loader.class: OD\TicketBundle\Service\Loader\IncomingLoader
+    outgoing_loader.class: OD\TicketBundle\Service\Loader\OutgoingLoader
+
+services:
+    incoming.loader:
+        class: '%incoming_loader.class%'
+        arguments: ['@doctrine.orm.entity_manager']
+    outgoing.loader:
+        class: '%outgoing_loader.class%'
+        arguments: ['@doctrine.orm.entity_manager']

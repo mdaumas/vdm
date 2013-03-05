@@ -5,8 +5,6 @@ parameters:
 services:
     module.manager:
         class: '%module_manager_service.class%'
-        arguments:
     config.manager:
         class: '%config_manager_service.class%'
         arguments: ['@module.manager', '@translator']
-
