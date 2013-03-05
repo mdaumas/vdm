@@ -46,6 +46,7 @@ Ext.define('Vdm.view.Application', {
                     handler: me.onSettings,
                     scope: me
                 },
+                '-',
                 {
                     text: me.logoutLabel,
                     iconCls:'logout',
