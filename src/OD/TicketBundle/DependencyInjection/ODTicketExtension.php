@@ -1,6 +1,6 @@
 <?php
 
-namespace OD\VdmBundle\DependencyInjection;
+namespace OD\TicketBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * @SuppressWarnings(PHPMD)
  */
-class ODVdmExtension extends Extension
+class ODTicketExtension extends Extension
 {
 
     /**
@@ -23,10 +23,10 @@ class ODVdmExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
-        $config        = $this->processConfiguration($configuration, $configs);
+        /*$config =*/ $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services.yml');
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('services.xml');
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace OD\ADBundle\DependencyInjection;
+namespace OD\TicketBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -15,13 +15,15 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
+
     /**
      * {@inheritDoc}
+     *
      */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        /*$rootNode =*/ $treeBuilder->root('active_directory');
+        /*$rootNode =*/ $treeBuilder->root('od_ticket');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
@@ -29,4 +31,5 @@ class Configuration implements ConfigurationInterface
 
         return $treeBuilder;
     }
+
 }

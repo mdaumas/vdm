@@ -1,34 +1,30 @@
 <?php
 
-namespace OD\VdmBundle\Controller;
+namespace OD\TicketBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
- * Defaut Controleur Class
+ * The default controller class
+ *
+ * @author Marc Daumas <mdaumas@objetdirect.com>
  */
 class DefaultController extends Controller
 {
 
     /**
-     * Index controler
+     * The index controller
      *
-     * @return array View parameters
-     *
-     * @Route("/", name="index")
+     * @return array The view parameters
+     * 
+     * @Route("/hello/{name}")
      * @Template()
      */
     public function indexAction()
     {
-
-        $vdmSrc = $this->container->getParameter('vdm_src');
-
-        return array(
-            'vdm_src' => $vdmSrc,
-            'ext_src' => $vdmSrc
-        );
+        return array();
     }
 
 }

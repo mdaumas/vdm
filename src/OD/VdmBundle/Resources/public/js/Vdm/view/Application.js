@@ -1,7 +1,7 @@
 /**
  * @class Vdm.view.Application
  * @extends Vdm.view.desktop.Application
- * 
+ *
  * @author Marc Daumas
  *
  * The ExtJs Application class
@@ -13,7 +13,23 @@ Ext.define('Vdm.view.Application', {
     'Vdm.view.desktop.Settings',
     'Vdm.view.desktop.TrayClock'
     ],
-    
+
+    /**
+     * Module object creation
+     */
+    getModules: function(){
+        var me = this;
+        var modules = [];
+
+        Ext.each(me.modulesConfig, function (moduleConfig) {
+            Ext.Loader.setPath(moduleConfig.name, moduleConfig.path);
+            var module = Ext.create(moduleConfig.name + '.Module', moduleConfig);
+            modules.push(module);
+        });
+
+        return modules;
+    },
+
     getStartConfig : function() {
         var me = this;
         ret = me.callParent();
@@ -47,10 +63,10 @@ Ext.define('Vdm.view.Application', {
      */
     onLogout: function () {
         var me = this;
-        
+
         Ext.Msg.confirm(
-            me.logoutDialogTitle, 
-            me.logoutConfirmText, 
+            me.logoutDialogTitle,
+            me.logoutConfirmText,
             function(button){
                 if(button == "yes"){
                     document.location = me.logoutUrl;
@@ -63,11 +79,11 @@ Ext.define('Vdm.view.Application', {
      */
     getTaskbarConfig: function () {
         var me = this;
-        var ret = this.callParent();       
+        var ret = this.callParent();
         var trayCfg = {
             flex: 1
         };
-        
+
         Ext.apply(trayCfg, me.trayConfig);
 
         return Ext.apply(ret, {
@@ -76,19 +92,19 @@ Ext.define('Vdm.view.Application', {
             ]
         });
     },
-    
+
     /**
      * Settings handler function
      */
     onSettings: function () {
         var me = this;
-        
+
         var cfg = {
             desktop: this.desktop
         };
-        
+
         Ext.apply(cfg, me.settingsConfig);
-        
+
         var dlg = Ext.create('Vdm.view.desktop.Settings', cfg);
         dlg.show();
     }

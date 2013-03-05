@@ -1,3 +1,8 @@
+od_ticket:
+    resource: "@ODTicketBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 od_vdm:
     resource: "@ODVdmBundle/Controller/"
     type:     annotation

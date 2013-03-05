@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new OD\VdmBundle\ODVdmBundle(),
             new OD\ADBundle\ODADBundle(),
+            new OD\TicketBundle\ODTicketBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

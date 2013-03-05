@@ -114,8 +114,9 @@ class AdUserProvider implements UserProviderInterface
     public function refreshUser(UserInterface $user)
     {
         if (!$user instanceof adUser) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.',
-                    get_class($user)));
+            throw new UnsupportedUserException(
+                sprintf('Instances of "%s" are not supported.', get_class($user))
+            );
         }
         $newUser = $this->loadUserByUsername($user->getUsername());
         $newUser->setPassword($user->getPassword()); //we reset the password

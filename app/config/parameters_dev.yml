@@ -1,2 +1,3 @@
 parameters:
     vdm_src: "%base_src%/src/OD/VdmBundle/Resources/public/js/Vdm"
+    ticket_src: "%base_src%/src/OD/TicketBundle/Resources/public/js/Ticket"

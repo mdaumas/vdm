@@ -35,19 +35,19 @@ class AdAuthFactory extends FormLoginFactory
      *
      * @return string never null, the id of the authentication provider
      */
-    protected function createAuthProvider(ContainerBuilder $container, $id, $config, $userProviderId)
+    protected function createAuthProvider(ContainerBuilder $container, $id, $config, $userProviderId )
     {
 
         $providerId = 'security.authentication.provider.active_directory.' . $id;
         $container
-            ->setDefinition($providerId,
-                new DefinitionDecorator('active.directory.authentication.provider'))
+            ->setDefinition(
+                $providerId, new DefinitionDecorator('active.directory.authentication.provider')
+            )
             ->replaceArgument(0, new Reference("active.directory.user.provider"))
             ->replaceArgument(1, $config);
 
         return $providerId;
     }
-
 
     /**
      * {@inheritDoc}

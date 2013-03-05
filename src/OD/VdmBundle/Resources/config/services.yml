@@ -1,2 +1,7 @@
-## YAML Template.
----
+parameters:
+    module_manager_service.class: OD\VdmBundle\Service\ModuleManagerService
+
+services:
+    module.manager.service:
+        class: "%module_manager_service.class%"
+        arguments:

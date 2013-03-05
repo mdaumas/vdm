@@ -1,7 +1,8 @@
 parameters:
     base_src: http://localhost/vdm
     vdm_src: "%base_src%/web/bundles/odvdm/js/Vdm"
-    
+    ticket_src: "%base_src%/web/bundles/odticket/js/Ticket"
+
     database_driver:     pdo_mysql
     database_host:       127.0.0.1
     database_port:       ~
@@ -22,8 +23,8 @@ parameters:
         base_dn : DC=viseo,DC=net       #The DN of the domain
         domain_controllers :
             - 172.30.251.47
-        admin_username: 
-        admin_password: 
+        admin_username:
+        admin_password:
         real_primarygroup : true        #For Linux compatibility.
         use_ssl : false
         use_tls : false

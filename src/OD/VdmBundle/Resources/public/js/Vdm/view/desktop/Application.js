@@ -1,16 +1,16 @@
 /**
  * @class Vdm.view.desktop.Application
  * @extends Ext.app.Application
- * 
+ *
  * requires Vdm.view.desktop.Application
  * @author Marc Daumas
- * 
+ *
  * The ExtJs Desktop Application Class
  **/
 Ext.define('Vdm.view.desktop.Application', {
-    
+
     extend : "Ext.app.Application",
-    
+
     mixins: {
         observable: 'Ext.util.Observable'
     },
@@ -20,9 +20,8 @@ Ext.define('Vdm.view.desktop.Application', {
     'Vdm.view.desktop.Desktop'
     ],
 
-    modules: null,
+    modules: [],
     useQuickTips: true,
-    getModules: Ext.emptyFn,
 
     /**
      * Called automatically when the page has completely loaded.
@@ -53,11 +52,11 @@ Ext.define('Vdm.view.desktop.Application', {
     },
 
     /**
-     * Returns configuration object for the Desktop. 
+     * Returns configuration object for the Desktop.
      */
     getDesktopConfig: function () {
         var me = this;
-        
+
         // Get the taskbar config and add application
         var cfg = {
             app: me,
@@ -66,23 +65,23 @@ Ext.define('Vdm.view.desktop.Application', {
 
         // Merge with desktop config
         Ext.apply(cfg, me.desktopConfig);
-        
+
         return cfg;
     },
 
     /**
-     * Returns configuration object for the Start Button. 
+     * Returns configuration object for the Start Button.
      */
     getStartConfig: function () {
         var me = this;
         var launcher;
-        
+
         // Define empty menu and add application
         var cfg = {
             app: me,
             menu: []
         };
-        
+
         // Merge with startConfig
         Ext.apply(cfg, me.startConfig);
 
@@ -109,11 +108,11 @@ Ext.define('Vdm.view.desktop.Application', {
     },
 
     /**
-     * Returns the configuration object for the TaskBar. 
+     * Returns the configuration object for the TaskBar.
      */
     getTaskbarConfig: function () {
         var me = this;
-        
+
         // Define the Start Config and add application
         var cfg = {
             app: me,
@@ -122,7 +121,7 @@ Ext.define('Vdm.view.desktop.Application', {
 
         // Merge with Start Config
         Ext.apply(cfg, me.taskbarConfig);
-        
+
         return cfg;
     },
 
@@ -131,7 +130,7 @@ Ext.define('Vdm.view.desktop.Application', {
      */
     initModules : function(modules) {
         var me = this;
-        
+
         Ext.each(modules, function (module) {
             module.app = me;
         });
@@ -139,18 +138,18 @@ Ext.define('Vdm.view.desktop.Application', {
 
     /**
      * Return a module by name
-     * 
+     *
      * @var string name the name of the module
-     * 
+     *
      * @return Module object
      */
     getModule : function(name) {
         var ms = this.modules;
-        
+
         for (var i = 0, len = ms.length; i < len; i++) {
             var m = ms[i];
             if (m.id == name || m.appType == name) {
-                
+
                 return m;
             }
         }
@@ -159,7 +158,7 @@ Ext.define('Vdm.view.desktop.Application', {
 
     /**
      * return the Desktop object
-     * 
+     *
      * @return Desktop
      */
     getDesktop : function() {
