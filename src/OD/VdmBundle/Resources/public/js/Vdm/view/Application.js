@@ -2,7 +2,7 @@
  * @class Vdm.view.Application
  * @extends Vdm.view.desktop.Application
  *
- * @author Marc Daumas
+ * @author Marc Daumas <mdaumas@objetdirect.com>
  *
  * The ExtJs Application class
  **/
@@ -31,7 +31,7 @@ Ext.define('Vdm.view.Application', {
 
     getStartConfig : function() {
         var me = this;
-        ret = me.callParent();
+        var ret = me.callParent();
 
         return Ext.apply(ret, {
             title: me.loggedUser.displayName,

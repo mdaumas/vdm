@@ -11,7 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity
  *
- * @ORM\Table(name="incoming_call")
+ * @ORM\Table(name="incoming_call",indexes={
+ *     @ORM\Index(name="nature_idx", columns={"nature"})
+ * })
  *
  * @ORM\Entity(repositoryClass="OD\TicketBundle\Repository\IncomingCallRepository")
  *

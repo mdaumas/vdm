@@ -11,8 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity
  *
- * @ORM\Table(name="outgoing_call")
- *
+ * @ORM\Table(name="outgoing_call",indexes={
+ *     @ORM\Index(name="nature_idx", columns={"nature"}),
+ *     @ORM\Index(name="type_idx", columns={"type"})
+ * })
  * @ORM\Entity(repositoryClass="OD\TicketBundle\Repository\OutgoingCallRepository")
  *
  * @author Marc Daumas <mdaumas@objetdirect.com>
