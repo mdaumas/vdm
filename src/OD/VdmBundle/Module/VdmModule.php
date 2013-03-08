@@ -19,9 +19,17 @@ abstract class VdmModule
 
     /**
      * The module javascript path
-     * @var type
+     *
+     * @var string
      */
     private $path;
+
+    /**
+     * The module routes names array
+     *
+     * @var array
+     */
+    private $routes;
 
     /**
      * The module config array
@@ -89,6 +97,26 @@ abstract class VdmModule
     public function getConfig()
     {
         return $this->config;
+    }
+
+    /**
+     * Accessor
+     *
+     * @param array $routes the module routes
+     */
+    public function setRoutes($routes)
+    {
+        $this->routes = $routes;
+    }
+
+    /**
+     *  Accessor
+     *
+     * @return array
+     */
+    public function getRoutes()
+    {
+        return $this->routes;
     }
 
     /**

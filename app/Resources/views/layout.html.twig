@@ -23,22 +23,31 @@ Statistiques téléphoniques Viséo
 Ext.define("Vdm.Constants",{
     singleton	: true,
 
+    // Paths des modules
     LOADER_PATHS : {
         Vdm : "{{ vdm_src|default('') }}",
         Ext:  "{{ ext_src|default('') }}",
-    {% for module in modules%}
+    {% for module in modules|default([]) %}
         {{module.name}} : "{{module.path}}",
     {% endfor %}
     },
 
+    // Requires des modules
     REQUIRES : [
         'Vdm.view.Application',
-    {% for module in modules%}
+    {% for module in modules|default([]) %}
         '{{module.name}}.Module',
     {% endfor %}
     ],
 
-    CONFIG_URL : "{{ path('vdm_config') }}",
+// Urls des modules
+{% for module in modules|default([]) %}
+    {% for route in module.routes|default([]) %}
+    {{route|upper}}: '{{path(route)}}',
+    {% endfor %}
+{% endfor %}
+
+CONFIG_URL : "{{ path('vdm_config') }}",
 });
 </script>
 {% endblock constants %}

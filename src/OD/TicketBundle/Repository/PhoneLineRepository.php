@@ -12,4 +12,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class PhoneLineRepository extends EntityRepository
 {
+
+    /**
+     * Find all phone lines
+     *
+     * @return array
+     */
+    public function findAllArray()
+    {
+        $qBuilder = $this->_em->createQueryBuilder()
+            ->select('pl')
+            ->from('ODTicketBundle:PhoneLine', 'pl');
+
+        return $qBuilder->getQuery()->getArrayResult();
+    }
+
 }
