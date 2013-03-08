@@ -16,15 +16,22 @@ class PhoneLineRepository extends EntityRepository
     /**
      * Find all phone lines
      *
+     * @param stdClass $sort
+     *
      * @return array
      */
-    public function findAllArray()
+    public function findAllQuery($sort)
     {
+
         $qBuilder = $this->_em->createQueryBuilder()
             ->select('pl')
             ->from('Ticket:PhoneLine', 'pl');
 
-        return $qBuilder->getQuery()->getArrayResult();
+        if ($sort) {
+            $qBuilder->addOrderBy('pl.' . $sort->property, $sort->direction);
+        }
+
+        return $qBuilder->getQuery();
     }
 
 }

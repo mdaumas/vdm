@@ -1,0 +1,49 @@
+{# default Sliding pagination control implementation #}
+
+{% if pager.getCount > pager.getPageSize %}
+<div class="pagination">
+    {% set pages = pager.pagesInRange %}
+    {% if pager.getFirstPage != pager.getPage and pager.getFirstPageInRange > 1 %}
+    <span class="first">
+        <a href="{{ path(route, {'page': pager.getFirstPage}) }}">
+            <img src="{{ asset('bundles/odshiva/images/resultset_first.png') }}">
+        </a>
+    </span>
+    {% endif %}
+
+    {% if pager.getPrevious != null %}
+    <span class="previous">
+        <a href="{{ path(route, {'page': pager.getPrevious}) }}">
+            <img src="{{ asset('bundles/odshiva/images/resultset_previous1.png') }}">
+        </a>
+    </span>
+    {% endif %}
+
+    {% for page in pages %}
+        {% if page != pager.getPage %}
+    <span class="page">
+        <a href="{{ path(route, {'page': page}) }}">{{ page }}</a>
+    </span>
+            {% else %}
+    <span class="current">{{ page }}</span>
+        {% endif %}
+
+    {% endfor %}
+
+    {% if pager.getNext != null %}
+    <span class="next">
+        <a href="{{ path(route, {'page': pager.getNext}) }}">
+            <img src="{{ asset('bundles/odshiva/images/resultset_next1.png') }}">
+        </a>
+    </span>
+    {% endif %}
+
+    {% if pager.getLastPage != pager.getPage and pager.getLastPageInRange < pager.getLastPage  %}
+    <span class="last">
+        <a href="{{ path(route, {'page': pager.getLastPage}) }}">
+            <img src="{{ asset('bundles/odshiva/images/resultset_last.png') }}">
+        </a>
+    </span>
+    {% endif %}
+</div>
+{% endif %}

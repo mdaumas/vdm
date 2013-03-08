@@ -1,0 +1,43 @@
+{% set count = pager.getCount %}
+
+<div style="float:left" >
+{% if app.session.locale == 'fr_FR' or app.session.locale == 'fr' %}
+{% transchoice count %}
+        {0} aucun%entity_genre% %entity_name% trouvé%entity_genre%|{1} 1 %entity_name% trouvé%entity_genre%|]1,Inf] %count% %entity_name%s trouvé%entity_genre%s
+{% endtranschoice %} / &nbsp;
+{% else %}
+{% transchoice count %}
+        {0} no %entity_name% found|{1} 1 %entity_name% found|]1,Inf] %count% %entity_name%s found
+{% endtranschoice %} / &nbsp;
+{% endif %}
+</div>
+
+<div style="float:left">
+    <select class="page_size" name="{{ selector_id }}" id="{{ selector_id }}">
+            {% for i in select_values|default([10, 20, 30, 50, 100, 200, 1000, 2000]) %}
+                {% if i == pager.getPageSize %} {% set selected = 'selected="selected"' %} {% else %} {% set selected = '' %} {% endif %}
+        <option {{ selected }} value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+    </select>
+</div>
+
+<div style="float:left">
+    &nbsp;{%trans%}par page{%endtrans%}&nbsp;
+</div>
+<div>
+    <a  class="shiva-mini-button" id="set_pageSize"  href="#"  onclick="submit_page_size('{{ selector_id }}', '{{ filter_form_id }}', '{{ hidden_id }}');">OK</a>
+</div>
+
+<script type="text/javascript">
+function submit_page_size(selector_id, filter_form_id, hidden_id){
+    var psv = $('#' + selector_id).val();
+
+    $('#' + hidden_id).val( psv);
+    $('#' + filter_form_id).submit();
+}
+
+jQuery(document).ready(function($) {
+     var psv = $('#{{ selector_id }}').val();
+     $('#{{hidden_id}}').val( psv);
+    });
+</script>

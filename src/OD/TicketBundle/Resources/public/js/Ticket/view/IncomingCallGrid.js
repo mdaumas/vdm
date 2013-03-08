@@ -1,6 +1,9 @@
 Ext.define('Ticket.view.IncomingCallGrid' ,{
     extend: 'Ext.grid.Panel',
-    requires: ['Ticket.store.IncomingCall'],
+    requires: [
+    'Ticket.store.IncomingCall',
+    'Ext.PagingToolbar'
+    ],
 
     alias: 'widget.incomingcall_grid',
 
@@ -16,7 +19,7 @@ Ext.define('Ticket.view.IncomingCallGrid' ,{
         },
         {
             header: this.colheaders.phoneline,
-            dataIndex: 'phoneline',
+            dataIndex: 'phoneLine',
             flex: 1
         },
         {
@@ -40,6 +43,11 @@ Ext.define('Ticket.view.IncomingCallGrid' ,{
             flex: 1
         }
         ];
+
+        this.bbar = Ext.create('Ext.PagingToolbar', {
+            store: this.store,
+            displayInfo: true
+        });
 
         this.callParent(arguments);
     }

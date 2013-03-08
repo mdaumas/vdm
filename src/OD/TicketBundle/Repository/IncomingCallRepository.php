@@ -16,9 +16,11 @@ class IncomingCallRepository extends EntityRepository
     /**
      * Find all phone lines
      *
+     * @param stdClass $sort
+     *
      * @return array
      */
-    public function findAllArray()
+    public function findAllQuery($sort)
     {
         $qBuilder = $this->_em->createQueryBuilder()
             ->select("
@@ -27,11 +29,16 @@ class IncomingCallRepository extends EntityRepository
                 i.duration,
                 i.callingNumber,
                 i.nature,
-                pl.number as phoneline")
+                pl.number as phoneLine")
             ->from('Ticket:IncomingCall', 'i')
             ->leftJoin('i.phoneLine', 'pl');
 
-        return $qBuilder->getQuery()->getArrayResult();
+        if ($sort) {
+            $prefix = $sort->property == 'number' ? 'pl.' : 'i.';
+            $qBuilder->addOrderBy($prefix . $sort->property, $sort->direction);
+        }
+
+        return $qBuilder->getQuery();
     }
 
 }

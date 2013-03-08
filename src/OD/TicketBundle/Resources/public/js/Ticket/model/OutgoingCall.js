@@ -2,7 +2,7 @@ Ext.define('Ticket.model.OutgoingCall', {
     extend: 'Ext.data.Model',
     fields: [
         'idkey',
-        'phoneline',
+        'phoneLine',
         'date',
         'duration',
         'calledNumber',

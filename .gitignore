@@ -8,3 +8,16 @@ composer.phar
 /web/bundles/
 /web/css/
 /web/js/
+/vendor/symfony/
+/vendor/autoload.php
+/vendor/doctrine/
+/vendor/adldap/
+/vendor/kriswallsmith/
+/vendor/jdorn/
+/vendor/composer/
+/vendor/monolog/
+/vendor/bin/
+/vendor/sensio/
+/vendor/swiftmailer/
+/vendor/jms/
+/vendor/twig/

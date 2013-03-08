@@ -29,6 +29,7 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+            new bundles\OD\Bundle\PagerBundle\ODPagerBundle(),
             new OD\VdmBundle\ODVdmBundle(),
             new OD\ADBundle\ODADBundle(),
             new OD\TicketBundle\ODTicketBundle(),
