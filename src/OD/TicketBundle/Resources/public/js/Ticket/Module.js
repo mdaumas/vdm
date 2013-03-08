@@ -3,7 +3,8 @@ Ext.define('Ticket.Module', {
 
     requires:[
     'Ticket.view.PhoneLineGrid',
-    'Ticket.view.IncomingCallGrid'
+    'Ticket.view.IncomingCallGrid',
+    'Ticket.view.OutgoingCallGrid'
     ],
 
     id: 'calls-win',
@@ -38,6 +39,12 @@ Ext.define('Ticket.Module', {
                         xtype: 'incomingcall_grid',
                         title: me.tabs.incomingCall.title,
                         colheaders: me.tabs.incomingCall.colheaders,
+                        header:false,
+                        border:false
+                    },{
+                        xtype: 'outgoingcall_grid',
+                        title: me.tabs.outgoingCall.title,
+                        colheaders: me.tabs.outgoingCall.colheaders,
                         header:false,
                         border:false
                     }]

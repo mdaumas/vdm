@@ -26,7 +26,8 @@ class ODTicketBundle extends Bundle
         $ticketModule->setPath($this->container->getParameter('ticket_src'));
         $ticketModule->setRoutes(array(
             'phoneline_find',
-            'incomingcall_find'
+            'incomingcall_find',
+            'outgoingcall_find'
             )
         );
         $ticketModule->setConfig(array(
@@ -56,6 +57,23 @@ class ODTicketBundle extends Bundle
                         'duration'      => $translator->trans('Durée'),
                         'callingNumber' => $translator->trans('Numéro Appelant'),
                         'nature'        => $translator->trans('Nature')
+                    )
+                ),
+                'outgoingCall'  => array(
+                    'title'      => $translator->trans('Appels Sortans'),
+                    'colheaders' => array(
+                        'idkey'         => $translator->trans('Clé'),
+                        'phoneline'     => $translator->trans('Ligne'),
+                        'date'          => $translator->trans('date'),
+                        'duration'      => $translator->trans('Durée'),
+                        'calledNumber'  => $translator->trans('Numéro Appelé'),
+                        'nature'        => $translator->trans('Nature'),
+                        'type'          => $translator->trans('Type'),
+                        'destination'   => $translator->trans('Destination'),
+                        'price'         => $translator->trans('Prix'),
+                        'designation'   => $translator->trans('Designation'),
+                        'callingNumber' => $translator->trans('Numéro Appelant'),
+                        'dialedNumber'  => $translator->trans('Numéro Composé'),
                     )
                 )
             )
