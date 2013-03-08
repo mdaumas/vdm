@@ -12,4 +12,26 @@ use Doctrine\ORM\EntityRepository;
  */
 class IncomingCallRepository extends EntityRepository
 {
+
+    /**
+     * Find all phone lines
+     *
+     * @return array
+     */
+    public function findAllArray()
+    {
+        $qBuilder = $this->_em->createQueryBuilder()
+            ->select("
+                i.idkey,
+                DATE_FORMAT(i.date, '%d/%m/%Y %H:%i:%s') as date,
+                i.duration,
+                i.callingNumber,
+                i.nature,
+                pl.number as phoneline")
+            ->from('Ticket:IncomingCall', 'i')
+            ->leftJoin('i.phoneLine', 'pl');
+
+        return $qBuilder->getQuery()->getArrayResult();
+    }
+
 }

@@ -7,11 +7,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * The PhoneLine controller class
+ * The IncomingCall controller class
  *
  * @author Marc Daumas <mdaumas@objetdirect.com>
  */
-class PhoneLineController extends Controller
+class IncomingCallController extends Controller
 {
 
     /**
@@ -19,19 +19,19 @@ class PhoneLineController extends Controller
      *
      * @return string Json result
      *
-     * @Route("/phoneline/find", name="phoneline_find")
+     * @Route("/incoming/find", name="incomingcall_find")
      */
     public function indexAction()
     {
         $eManager = $this->getDoctrine()->getEntityManager();
         $result = array();
 
-        $result = $eManager->getRepository('Ticket:PhoneLine')->findAllArray();
+        $result = $eManager->getRepository('Ticket:IncomingCall')->findAllArray();
 
         return new Response(json_encode(
                     array(
                         "success"    => true,
-                        "phonelines" => $result
+                        "incomingcalls" => $result
                     )
                 )
         );

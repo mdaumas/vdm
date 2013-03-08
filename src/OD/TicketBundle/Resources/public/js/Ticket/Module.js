@@ -1,7 +1,10 @@
 Ext.define('Ticket.Module', {
     extend: 'Vdm.view.desktop.Module',
 
-    requires:['Ticket.controller.PhoneLine'],
+    requires:[
+    'Ticket.view.PhoneLineGrid',
+    'Ticket.view.IncomingCallGrid'
+    ],
 
     id: 'calls-win',
     iconCls: 'tabs',
@@ -29,6 +32,12 @@ Ext.define('Ticket.Module', {
                         xtype: 'phoneline_grid',
                         title: me.tabs.phoneLine.title,
                         colheaders: me.tabs.phoneLine.colheaders,
+                        header:false,
+                        border:false
+                    },{
+                        xtype: 'incomingcall_grid',
+                        title: me.tabs.incomingCall.title,
+                        colheaders: me.tabs.incomingCall.colheaders,
                         header:false,
                         border:false
                     }]

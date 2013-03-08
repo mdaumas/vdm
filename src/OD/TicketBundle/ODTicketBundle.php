@@ -24,7 +24,11 @@ class ODTicketBundle extends Bundle
         $ticketModule = new TicketModule();
         $ticketModule->setName('Ticket');
         $ticketModule->setPath($this->container->getParameter('ticket_src'));
-        $ticketModule->setRoutes(array('phoneline_find'));
+        $ticketModule->setRoutes(array(
+            'phoneline_find',
+            'incomingcall_find'
+            )
+        );
         $ticketModule->setConfig(array(
             'launcher' => array(
                 'text'          => $translator->trans('Gestion des Appels'),
@@ -38,9 +42,20 @@ class ODTicketBundle extends Bundle
             ),
             'tabs'    => array(
                 'phoneLine' => array(
-                    'title' => $translator->trans('Lignes'),
+                    'title'      => $translator->trans('Lignes'),
                     'colheaders' => array(
-                        'numero' => $translator->trans('Numéro')
+                        'numero'       => $translator->trans('Numéro')
+                    )
+                ),
+                'incomingCall' => array(
+                    'title'      => $translator->trans('Appels Entrants'),
+                    'colheaders' => array(
+                        'idkey'         => $translator->trans('Clé'),
+                        'phoneline'     => $translator->trans('Ligne'),
+                        'date'          => $translator->trans('date'),
+                        'duration'      => $translator->trans('Durée'),
+                        'callingNumber' => $translator->trans('Numéro Appelant'),
+                        'nature'        => $translator->trans('Nature')
                     )
                 )
             )

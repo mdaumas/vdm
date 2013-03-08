@@ -49,7 +49,15 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
+        entity_managers:
+            default:
+                auto_mapping: true
+                dql:
+                    string_functions:
+                      date_format: OD\TicketBundle\Lib\DqlFunction\DateFormat
+                mappings:
+                    ODVdmBundle: { type: annotation, dir: Entity, alias: Vdm}
+                    ODTicketBundle: { type: annotation, dir: Entity, alias: Ticket}
 
 # Swiftmailer Configuration
 swiftmailer:

@@ -22,7 +22,7 @@ class PhoneLineRepository extends EntityRepository
     {
         $qBuilder = $this->_em->createQueryBuilder()
             ->select('pl')
-            ->from('ODTicketBundle:PhoneLine', 'pl');
+            ->from('Ticket:PhoneLine', 'pl');
 
         return $qBuilder->getQuery()->getArrayResult();
     }
