@@ -55,8 +55,6 @@ class IncomingCallController extends Controller
                 $this->get('request')->get('limit', 10)
         );
 
-        $pager->getCount();
-
         return $pager;
     }
 

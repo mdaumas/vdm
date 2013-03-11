@@ -30,8 +30,8 @@ class OutgoingCallController extends Controller
         return new Response(json_encode(
                     array(
                         "success"       => true,
-                        'outgoingcalls' => $pager->getArrayResult(),
-                        'totalCount' => $pager->getCount()
+                        'totalCount' => $pager->getCount(),
+                        'outgoingcalls' => $pager->getArrayResult()
                     )
                 )
         );
@@ -54,8 +54,6 @@ class OutgoingCallController extends Controller
                 $this->get('request')->get('page', 1),
                 $this->get('request')->get('limit', 10)
         );
-
-        $pager->getCount();
 
         return $pager;
     }
