@@ -60,7 +60,7 @@ class ODTicketBundle extends Bundle
                     )
                 ),
                 'outgoingCall'  => array(
-                    'title'      => $translator->trans('Appels Sortans'),
+                    'title'      => $translator->trans('Appels Sortants'),
                     'colheaders' => array(
                         'idkey'         => $translator->trans('Clé'),
                         'phoneline'     => $translator->trans('Ligne'),

@@ -4,18 +4,26 @@ namespace bundles\OD\Bundle\PagerBundle\Paginate;
 
 use Doctrine\ORM\Query;
 
-class Paginate {
+/**
+ * paginate Class
+ */
+class Paginate
+{
 
     /**
+     * Count query
      *
      * @param Query $query
+     * 
      * @return <type>
      */
-    static public function count(Query $query) {
+    static public function count(Query $query)
+    {
 
         $countQuery = clone $query;
 
-        $countQuery->setHint(Query::HINT_CUSTOM_TREE_WALKERS, array('bundles\OD\Bundle\PagerBundle\Paginate\CountSqlWalker'));
+        $countQuery->setHint(Query::HINT_CUSTOM_TREE_WALKERS,
+            array('bundles\OD\Bundle\PagerBundle\Paginate\CountSqlWalker'));
         $countQuery->setFirstResult(null)->setMaxResults(null);
 
         try {

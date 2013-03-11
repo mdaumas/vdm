@@ -27,7 +27,7 @@ class IncomingCallController extends Controller
         $sort = \json_decode($this->get('request')->get('sort'));
         $pager = $this->getFindPager($sort[0]);
 
-        return new Response(json_encode(
+        return new Response(\json_encode(
                     array(
                         "success"    => true,
                         'totalCount' => $pager->getCount(),
@@ -54,6 +54,8 @@ class IncomingCallController extends Controller
                 $this->get('request')->get('page', 1),
                 $this->get('request')->get('limit', 10)
         );
+
+        $pager->getCount();
 
         return $pager;
     }
